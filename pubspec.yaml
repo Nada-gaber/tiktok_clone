@@ -28,6 +28,10 @@ dependencies:
   video_player: ^2.9.5
   chewie: ^1.10.0
   video_player_android: ^2.3.0
+
+  # delete this if we are working on production flavour
+  pretty_dio_logger: ^1.4.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
