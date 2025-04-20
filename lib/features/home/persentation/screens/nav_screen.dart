@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../../profile/presentation/screens/reels_video.dart';
 import 'home_screen.dart';
 
 class NavScreen extends StatefulWidget {
@@ -14,7 +15,7 @@ class _NavScreenState extends State<NavScreen> {
 
   // List of screens for navigation
   final List<Widget> _screens = [
-    const HomeScreen(),
+    const ReelsVideo(),
     const HomeScreen(),
     const HomeScreen(),
     const HomeScreen(),
