@@ -8,6 +8,10 @@ class DioClient {
 
   DioClient() {
     _dio.options.baseUrl = 'https://api.pexels.com/v1/';
+
+    // interceptors without use package 
+    //  _dio.interceptors.add(CustomLoggerInterceptor());
+
     _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) {
