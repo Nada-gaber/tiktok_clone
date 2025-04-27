@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:tiktok_clone/core/themes/colors.dart';
+import '../../../../core/themes/images.dart';
 import '../../../profile/presentation/screens/reels_video.dart';
 import 'home_screen.dart';
 
@@ -40,17 +42,17 @@ class _NavScreenState extends State<NavScreen> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 30),
             decoration: const BoxDecoration(
-              color: Colors.black,
-              border: Border(top: BorderSide(color: Colors.grey, width: 0.5)),
+              color: AppColors.appBarBackground,
+              border: Border(top: BorderSide(color: Colors.black, width: 0.5)),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _navItem(0, 'assets/icons/navbar/home.svg', 'Home'),
-                _navItem(1, 'assets/icons/navbar/search.svg', 'Discover'),
+                _navItem(0, AppAssets.homeIcon, 'Home'),
+                _navItem(1, AppAssets.searchIcon, 'Discover'),
                 _uploadButton(),
-                _navItem(3, 'assets/icons/navbar/inbox.svg', 'Inbox'),
-                _navItem(4, 'assets/icons/navbar/profile.svg', 'Profile'),
+                _navItem(3, AppAssets.inboxIcon, 'Inbox'),
+                _navItem(4, AppAssets.profileIcon, 'Profile'),
               ],
             ),
           ),
@@ -76,7 +78,9 @@ class _NavScreenState extends State<NavScreen> {
                 width: 18,
                 height: 18,
                 colorFilter: ColorFilter.mode(
-                  _selectedIndex == index ? Colors.white : Colors.grey,
+                  _selectedIndex == index
+                      ? AppColors.backgroundDarkBlue
+                      : AppColors.textSecondary,
                   BlendMode.srcIn,
                 ),
               ),
@@ -85,7 +89,9 @@ class _NavScreenState extends State<NavScreen> {
                 child: Text(
                   indexTitle,
                   style: TextStyle(
-                    color: _selectedIndex == index ? Colors.white : Colors.grey,
+                    color: _selectedIndex == index
+                        ? AppColors.backgroundDarkBlue
+                        : AppColors.textSecondary,
                     fontSize: 8,
                   ),
                 ),
@@ -105,7 +111,7 @@ class _NavScreenState extends State<NavScreen> {
         MaterialPageRoute(builder: (_) => const HomeScreen()),
       ),
       child: SvgPicture.asset(
-        'assets/icons/navbar/add.svg',
+        AppAssets.addButton,
         width: 30,
         height: 30,
       ),
