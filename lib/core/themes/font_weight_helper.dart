@@ -6,7 +6,8 @@ class AppFonts {
     fontFamily: 'Poppins', // TikTok uses Poppins or a similar sans-serif font
     fontWeight: FontWeight.w400, // Regular weight
     fontSize: 14.0, // Standard font size
-  );
+    color: Colors.white
+      );
 
   // Bold font style for headings, buttons, and important text
   static const TextStyle bold = TextStyle(
