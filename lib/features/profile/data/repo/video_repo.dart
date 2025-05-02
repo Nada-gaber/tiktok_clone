@@ -1,3 +1,5 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 import '../../../../core/networking/api_services.dart';
 import '../models/video_model.dart';
 
@@ -6,7 +8,9 @@ class VideoRepository {
 
   VideoRepository(this._api);
 
-  Future<PexelsVideoModel> getVideos() async {
-    return _api.getCuratedPhotos();
+  Future<PixabayResponse> getVideos() async {
+    return _api.getCuratedPhotos(
+      dotenv.env['PIXABAY_API_KEY'] ?? '',
+    );
   }
 }
