@@ -1,57 +1,59 @@
-import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
-class VideoPlayerWidget extends StatefulWidget {
+class AutoPlayVideoPlayer extends StatefulWidget {
   final String url;
+  final bool play;
 
-  const VideoPlayerWidget({super.key, required this.url});
+  const AutoPlayVideoPlayer({
+    super.key,
+    required this.url,
+    required this.play,
+  });
 
   @override
-  State<VideoPlayerWidget> createState() => _VideoPlayerWidgetState();
+  State<AutoPlayVideoPlayer> createState() => _AutoPlayVideoPlayerState();
 }
 
-class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
-  late VideoPlayerController _videoPlayerController;
-  ChewieController? _chewieController;
+class _AutoPlayVideoPlayerState extends State<AutoPlayVideoPlayer> {
+  late VideoPlayerController _controller;
 
   @override
   void initState() {
     super.initState();
-    _videoPlayerController = VideoPlayerController.network(widget.url)
-      ..initialize().then((_) {
-        _chewieController = ChewieController(
-          videoPlayerController: _videoPlayerController,
-          autoPlay: false,
-          looping: false,
-        );
-        setState(() {});
-      });
+    _controller = VideoPlayerController.network(widget.url)
+      ..initialize().then((_) => setState(() {}));
+  }
+
+  @override
+  void didUpdateWidget(covariant AutoPlayVideoPlayer oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.play) {
+      _controller.play();
+    } else {
+      _controller.pause();
+    }
   }
 
   @override
   void dispose() {
-    _videoPlayerController.dispose();
-    _chewieController?.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_chewieController != null &&
-        _chewieController!.videoPlayerController.value.isInitialized) {
-      return SizedBox.expand(
-        child: FittedBox(
-          fit: BoxFit.cover,
-          child: SizedBox(
-            width: _videoPlayerController.value.size.width,
-            height: _videoPlayerController.value.size.height,
-            child: Chewie(controller: _chewieController!),
-          ),
-        ),
-      );
-    } else {
-      return const Center(child: CircularProgressIndicator());
-    }
+    return _controller.value.isInitialized
+        ? SizedBox.expand(
+            child: FittedBox(
+              fit: BoxFit.cover,
+              child: SizedBox(
+                width: _controller.value.size.width,
+                height: _controller.value.size.height,
+                child: VideoPlayer(_controller),
+              ),
+            ),
+          )
+        : const Center(child: CircularProgressIndicator());
   }
 }

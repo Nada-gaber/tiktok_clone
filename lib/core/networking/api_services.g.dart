@@ -12,31 +12,29 @@ class _PexelsApi implements PexelsApi {
   _PexelsApi(
     this._dio, {
     this.baseUrl,
-    this.errorLogger,
   }) {
-    baseUrl ??= 'https://api.pexels.com/videos';
+    baseUrl ??= 'https://pixabay.com/api';
   }
 
   final Dio _dio;
 
   String? baseUrl;
 
-  final ParseErrorLogger? errorLogger;
 
   @override
-  Future<PexelsVideoModel> getCuratedPhotos() async {
+  Future<PixabayResponse> getCuratedPhotos(String apiKey) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'key': apiKey};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<PexelsVideoModel>(Options(
+    final _options = _setStreamType<PixabayResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          '/popular',
+          '/videos/',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -46,11 +44,10 @@ class _PexelsApi implements PexelsApi {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late PexelsVideoModel _value;
+    late PixabayResponse _value;
     try {
-      _value = PexelsVideoModel.fromJson(_result.data!);
+      _value = PixabayResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;
