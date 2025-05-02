@@ -7,7 +7,7 @@ class DioClient {
   final Dio _dio = Dio();
 
   DioClient() {
-    _dio.options.baseUrl = 'https://api.pexels.com/v1/';
+    _dio.options.baseUrl = 'https://pixabay.com/api/?key=${dotenv.env['PIXABAY_API_KEY']}';
 
     // interceptors without use package 
     //  _dio.interceptors.add(CustomLoggerInterceptor());
@@ -15,7 +15,7 @@ class DioClient {
     _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) {
-          final apiKey = dotenv.env['PEXELS_API_KEY'];
+          final apiKey = dotenv.env['PIXABAY_API_KEY'];
           options.headers['Authorization'] = apiKey;
           return handler.next(options);
         },

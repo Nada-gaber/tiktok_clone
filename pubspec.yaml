@@ -26,7 +26,6 @@ dependencies:
   flutter_bloc: ^9.1.0
   freezed_annotation: ^2.2.0
   video_player: ^2.9.5
-  chewie: ^1.10.0
   video_player_android: ^2.3.0
 
   # delete this if we are working on production flavour
@@ -72,4 +71,5 @@ flutter:
   assets:
     - assets/fonts/
     - assets/icons/navbar/
+    - assets/icons/reels/
     - .tiktok.env

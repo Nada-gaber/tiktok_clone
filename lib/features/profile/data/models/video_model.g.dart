@@ -6,93 +6,114 @@ part of 'video_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PexelsVideoModel _$PexelsVideoModelFromJson(Map<String, dynamic> json) =>
-    PexelsVideoModel(
-      page: (json['page'] as num).toInt(),
-      perPage: (json['per_page'] as num).toInt(),
-      totalResults: (json['total_results'] as num).toInt(),
-      url: json['url'] as String,
-      videos: (json['videos'] as List<dynamic>)
-          .map((e) => Video.fromJson(e as Map<String, dynamic>))
+PixabayResponse _$PixabayResponseFromJson(Map<String, dynamic> json) =>
+    PixabayResponse(
+      total: (json['total'] as num?)?.toInt(),
+      totalHits: (json['totalHits'] as num?)?.toInt(),
+      hits: (json['hits'] as List<dynamic>?)
+          ?.map((e) => Hit.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$PexelsVideoModelToJson(PexelsVideoModel instance) =>
+Map<String, dynamic> _$PixabayResponseToJson(PixabayResponse instance) =>
     <String, dynamic>{
-      'page': instance.page,
-      'per_page': instance.perPage,
-      'total_results': instance.totalResults,
-      'url': instance.url,
+      'total': instance.total,
+      'totalHits': instance.totalHits,
+      'hits': instance.hits,
+    };
+
+Hit _$HitFromJson(Map<String, dynamic> json) => Hit(
+      videos: json['videos'] == null
+          ? null
+          : VideoQualities.fromJson(json['videos'] as Map<String, dynamic>),
+      id: (json['id'] as num?)?.toInt(),
+      pageURL: json['pageURL'] as String?,
+      type: json['type'] as String?,
+      tags: json['tags'] as String?,
+      previewURL: json['previewURL'] as String?,
+      previewWidth: (json['previewWidth'] as num?)?.toInt(),
+      previewHeight: (json['previewHeight'] as num?)?.toInt(),
+      webformatURL: json['webformatURL'] as String?,
+      webformatWidth: (json['webformatWidth'] as num?)?.toInt(),
+      webformatHeight: (json['webformatHeight'] as num?)?.toInt(),
+      largeImageURL: json['largeImageURL'] as String?,
+      fullHDURL: json['fullHDURL'] as String?,
+      imageURL: json['imageURL'] as String?,
+      imageWidth: (json['imageWidth'] as num?)?.toInt(),
+      imageHeight: (json['imageHeight'] as num?)?.toInt(),
+      imageSize: (json['imageSize'] as num?)?.toInt(),
+      views: (json['views'] as num?)?.toInt(),
+      downloads: (json['downloads'] as num?)?.toInt(),
+      likes: (json['likes'] as num?)?.toInt(),
+      comments: (json['comments'] as num?)?.toInt(),
+      userId: (json['user_id'] as num?)?.toInt(),
+      user: json['user'] as String?,
+      userImageURL: json['userImageURL'] as String?,
+    );
+
+Map<String, dynamic> _$HitToJson(Hit instance) => <String, dynamic>{
+      'id': instance.id,
+      'pageURL': instance.pageURL,
+      'type': instance.type,
+      'tags': instance.tags,
+      'previewURL': instance.previewURL,
+      'previewWidth': instance.previewWidth,
+      'previewHeight': instance.previewHeight,
+      'webformatURL': instance.webformatURL,
+      'webformatWidth': instance.webformatWidth,
+      'webformatHeight': instance.webformatHeight,
+      'largeImageURL': instance.largeImageURL,
+      'fullHDURL': instance.fullHDURL,
+      'imageURL': instance.imageURL,
       'videos': instance.videos,
-    };
-
-Video _$VideoFromJson(Map<String, dynamic> json) => Video(
-      id: (json['id'] as num).toInt(),
-      width: (json['width'] as num).toInt(),
-      height: (json['height'] as num).toInt(),
-      url: json['url'] as String,
-      image: json['image'] as String,
-      duration: (json['duration'] as num).toInt(),
-      user: VideoUser.fromJson(json['user'] as Map<String, dynamic>),
-      videoFiles: (json['video_files'] as List<dynamic>)
-          .map((e) => VideoFile.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      videoPictures: (json['video_pictures'] as List<dynamic>)
-          .map((e) => VideoPicture.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
-
-Map<String, dynamic> _$VideoToJson(Video instance) => <String, dynamic>{
-      'id': instance.id,
-      'width': instance.width,
-      'height': instance.height,
-      'url': instance.url,
-      'image': instance.image,
-      'duration': instance.duration,
+      'imageWidth': instance.imageWidth,
+      'imageHeight': instance.imageHeight,
+      'imageSize': instance.imageSize,
+      'views': instance.views,
+      'downloads': instance.downloads,
+      'likes': instance.likes,
+      'comments': instance.comments,
+      'user_id': instance.userId,
       'user': instance.user,
-      'video_files': instance.videoFiles,
-      'video_pictures': instance.videoPictures,
+      'userImageURL': instance.userImageURL,
     };
 
-VideoUser _$VideoUserFromJson(Map<String, dynamic> json) => VideoUser(
-      id: (json['id'] as num).toInt(),
-      name: json['name'] as String,
-      url: json['url'] as String,
+VideoQualities _$VideoQualitiesFromJson(Map<String, dynamic> json) =>
+    VideoQualities(
+      large: json['large'] == null
+          ? null
+          : VideoFile.fromJson(json['large'] as Map<String, dynamic>),
+      medium: json['medium'] == null
+          ? null
+          : VideoFile.fromJson(json['medium'] as Map<String, dynamic>),
+      small: json['small'] == null
+          ? null
+          : VideoFile.fromJson(json['small'] as Map<String, dynamic>),
+      tiny: json['tiny'] == null
+          ? null
+          : VideoFile.fromJson(json['tiny'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$VideoUserToJson(VideoUser instance) => <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'url': instance.url,
+Map<String, dynamic> _$VideoQualitiesToJson(VideoQualities instance) =>
+    <String, dynamic>{
+      'large': instance.large,
+      'medium': instance.medium,
+      'small': instance.small,
+      'tiny': instance.tiny,
     };
 
 VideoFile _$VideoFileFromJson(Map<String, dynamic> json) => VideoFile(
-      id: (json['id'] as num).toInt(),
-      quality: json['quality'] as String,
-      fileType: json['file_type'] as String,
-      width: (json['width'] as num?)?.toInt(),
-      height: (json['height'] as num?)?.toInt(),
-      link: json['link'] as String,
+      url: json['url'] as String,
+      width: (json['width'] as num).toInt(),
+      height: (json['height'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      thumbnail: json['thumbnail'] as String,
     );
 
 Map<String, dynamic> _$VideoFileToJson(VideoFile instance) => <String, dynamic>{
-      'id': instance.id,
-      'quality': instance.quality,
-      'file_type': instance.fileType,
+      'url': instance.url,
       'width': instance.width,
       'height': instance.height,
-      'link': instance.link,
-    };
-
-VideoPicture _$VideoPictureFromJson(Map<String, dynamic> json) => VideoPicture(
-      id: (json['id'] as num).toInt(),
-      picture: json['picture'] as String,
-      nr: (json['nr'] as num).toInt(),
-    );
-
-Map<String, dynamic> _$VideoPictureToJson(VideoPicture instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'picture': instance.picture,
-      'nr': instance.nr,
+      'size': instance.size,
+      'thumbnail': instance.thumbnail,
     };
