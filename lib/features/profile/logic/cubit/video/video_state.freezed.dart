@@ -20,7 +20,7 @@ mixin _$VideoState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(PexelsVideoModel videoModel) loaded,
+    required TResult Function(PixabayResponse videoModel) loaded,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$VideoState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(PexelsVideoModel videoModel)? loaded,
+    TResult? Function(PixabayResponse videoModel)? loaded,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$VideoState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(PexelsVideoModel videoModel)? loaded,
+    TResult Function(PixabayResponse videoModel)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -132,7 +132,7 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(PexelsVideoModel videoModel) loaded,
+    required TResult Function(PixabayResponse videoModel) loaded,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -143,7 +143,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(PexelsVideoModel videoModel)? loaded,
+    TResult? Function(PixabayResponse videoModel)? loaded,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -154,7 +154,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(PexelsVideoModel videoModel)? loaded,
+    TResult Function(PixabayResponse videoModel)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -249,7 +249,7 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(PexelsVideoModel videoModel) loaded,
+    required TResult Function(PixabayResponse videoModel) loaded,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -260,7 +260,7 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(PexelsVideoModel videoModel)? loaded,
+    TResult? Function(PixabayResponse videoModel)? loaded,
     TResult? Function(String message)? error,
   }) {
     return loading?.call();
@@ -271,7 +271,7 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(PexelsVideoModel videoModel)? loaded,
+    TResult Function(PixabayResponse videoModel)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -329,7 +329,7 @@ abstract class _$$LoadedImplCopyWith<$Res> {
           _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
       __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({PexelsVideoModel videoModel});
+  $Res call({PixabayResponse videoModel});
 }
 
 /// @nodoc
@@ -351,7 +351,7 @@ class __$$LoadedImplCopyWithImpl<$Res>
       null == videoModel
           ? _value.videoModel
           : videoModel // ignore: cast_nullable_to_non_nullable
-              as PexelsVideoModel,
+              as PixabayResponse,
     ));
   }
 }
@@ -362,7 +362,7 @@ class _$LoadedImpl implements _Loaded {
   const _$LoadedImpl(this.videoModel);
 
   @override
-  final PexelsVideoModel videoModel;
+  final PixabayResponse videoModel;
 
   @override
   String toString() {
@@ -394,7 +394,7 @@ class _$LoadedImpl implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(PexelsVideoModel videoModel) loaded,
+    required TResult Function(PixabayResponse videoModel) loaded,
     required TResult Function(String message) error,
   }) {
     return loaded(videoModel);
@@ -405,7 +405,7 @@ class _$LoadedImpl implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(PexelsVideoModel videoModel)? loaded,
+    TResult? Function(PixabayResponse videoModel)? loaded,
     TResult? Function(String message)? error,
   }) {
     return loaded?.call(videoModel);
@@ -416,7 +416,7 @@ class _$LoadedImpl implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(PexelsVideoModel videoModel)? loaded,
+    TResult Function(PixabayResponse videoModel)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -465,9 +465,9 @@ class _$LoadedImpl implements _Loaded {
 }
 
 abstract class _Loaded implements VideoState {
-  const factory _Loaded(final PexelsVideoModel videoModel) = _$LoadedImpl;
+  const factory _Loaded(final PixabayResponse videoModel) = _$LoadedImpl;
 
-  PexelsVideoModel get videoModel;
+  PixabayResponse get videoModel;
 
   /// Create a copy of VideoState
   /// with the given fields replaced by the non-null parameter values.
@@ -546,7 +546,7 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(PexelsVideoModel videoModel) loaded,
+    required TResult Function(PixabayResponse videoModel) loaded,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -557,7 +557,7 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(PexelsVideoModel videoModel)? loaded,
+    TResult? Function(PixabayResponse videoModel)? loaded,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -568,7 +568,7 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(PexelsVideoModel videoModel)? loaded,
+    TResult Function(PixabayResponse videoModel)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
