@@ -11,7 +11,7 @@
 migrate_working_dir/
 .tiktok.env
 firebase_options.dart
-google-services.json
+android/app/google-services.json
 GoogleService-Info.plist
 
 # IntelliJ related
