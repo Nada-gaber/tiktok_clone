@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tiktok_clone/core/themes/colors.dart';
+import 'package:tiktok_clone/features/profile/presentation/screens/profile.dart';
 import '../../../../core/themes/images.dart';
-import '../../../profile/presentation/screens/reels_video.dart';
+import 'reels_video.dart';
 import 'home_screen.dart';
 
 class NavScreen extends StatefulWidget {
@@ -21,7 +22,7 @@ class _NavScreenState extends State<NavScreen> {
     const HomeScreen(),
     const HomeScreen(),
     const HomeScreen(),
-    const HomeScreen(),
+    const ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {
