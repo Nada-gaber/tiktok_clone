@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/di/dependency_injection.dart';
 import '../../../../core/themes/images.dart';
-import '../../logic/cubit/video/video_state.dart';
-import '../../logic/cubit/video/videos_cubit.dart';
+import '../../../profile/logic/cubit/video/video_state.dart';
+import '../../../profile/logic/cubit/video/videos_cubit.dart';
 import '../widgets/reel_icon_button.dart';
 import '../widgets/video_play_widget.dart';
 
