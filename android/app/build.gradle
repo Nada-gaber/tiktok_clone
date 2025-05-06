@@ -1,7 +1,7 @@
 plugins {
     id "com.android.application"
     id "com.google.gms.google-services"
-    id "org.jetbrains.kotlin.android" // ✅ خليها بنفس الشكل، متناسقة مع settings.gradle
+    id "org.jetbrains.kotlin.android"
     id "dev.flutter.flutter-gradle-plugin"
 }
 
