@@ -38,7 +38,7 @@ class TabBarViewProfileTabs extends StatelessWidget {
                   style: AppFonts.bold,
                 ),
                 const SizedBox(height: 20),
-                const CustomUploadButton(),
+              //  const CustomUploadButton(),
               ],
             ),
           ),
