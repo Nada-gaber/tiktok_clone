@@ -174,6 +174,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.2"
+  cross_file:
+    dependency: transitive
+    description:
+      name: cross_file
+      sha256: "7caf6a750a0c04effbb52a676dce9a4a592e10ad35c34d6d2d0e4811160d5670"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.4+2"
   crypto:
     dependency: transitive
     description:
@@ -246,6 +254,46 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.0.1"
+  file_picker:
+    dependency: "direct main"
+    description:
+      name: file_picker
+      sha256: "1bbf65dd997458a08b531042ec3794112a6c39c07c37ff22113d2e7e4f81d4e4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.2.1"
+  file_selector_linux:
+    dependency: transitive
+    description:
+      name: file_selector_linux
+      sha256: "54cbbd957e1156d29548c7d9b9ec0c0ebb6de0a90452198683a7d23aed617a33"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.9.3+2"
+  file_selector_macos:
+    dependency: transitive
+    description:
+      name: file_selector_macos
+      sha256: "271ab9986df0c135d45c3cdb6bd0faa5db6f4976d3e4b437cf7d0f258d941bfc"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.9.4+2"
+  file_selector_platform_interface:
+    dependency: transitive
+    description:
+      name: file_selector_platform_interface
+      sha256: a3994c26f10378a039faa11de174d7b78eb8f79e4dd0af2a451410c1a5c3f66b
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.6.2"
+  file_selector_windows:
+    dependency: transitive
+    description:
+      name: file_selector_windows
+      sha256: "320fcfb6f33caa90f0b58380489fc5ac05d99ee94b61aa96ec2bff0ba81d3c2b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.9.3+4"
   firebase_auth:
     dependency: "direct main"
     description:
@@ -323,6 +371,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.2.1"
+  flutter_ffmpeg:
+    dependency: "direct main"
+    description:
+      name: flutter_ffmpeg
+      sha256: "8d8bb4551cf76384748ba6948739c1e56a9164794e48f06cbfb0ff1bfb058b5f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.2"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -331,6 +387,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.0"
+  flutter_plugin_android_lifecycle:
+    dependency: transitive
+    description:
+      name: flutter_plugin_android_lifecycle
+      sha256: "1c2b787f99bdca1f3718543f81d38aa1b124817dfeb9fb196201bea85b6134bf"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.26"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -349,6 +413,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  fraction:
+    dependency: "direct main"
+    description:
+      name: fraction
+      sha256: ac0d9904bb8211eb28606bdf623ff9f222c53240d8e9b927a07c149d356eddc2
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.0.3"
   freezed:
     dependency: "direct dev"
     description:
@@ -429,6 +501,70 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
+  image_picker:
+    dependency: "direct main"
+    description:
+      name: image_picker
+      sha256: "021834d9c0c3de46bf0fe40341fa07168407f694d9b2bb18d532dc1261867f7a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.2"
+  image_picker_android:
+    dependency: transitive
+    description:
+      name: image_picker_android
+      sha256: "82652a75e3dd667a91187769a6a2cc81bd8c111bbead698d8e938d2b63e5e89a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.8.12+21"
+  image_picker_for_web:
+    dependency: transitive
+    description:
+      name: image_picker_for_web
+      sha256: "717eb042ab08c40767684327be06a5d8dbb341fe791d514e4b92c7bbe1b7bb83"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.6"
+  image_picker_ios:
+    dependency: transitive
+    description:
+      name: image_picker_ios
+      sha256: "05da758e67bc7839e886b3959848aa6b44ff123ab4b28f67891008afe8ef9100"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.8.12+2"
+  image_picker_linux:
+    dependency: transitive
+    description:
+      name: image_picker_linux
+      sha256: "34a65f6740df08bbbeb0a1abd8e6d32107941fd4868f67a507b25601651022c9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.1+2"
+  image_picker_macos:
+    dependency: transitive
+    description:
+      name: image_picker_macos
+      sha256: "1b90ebbd9dcf98fb6c1d01427e49a55bd96b5d67b8c67cf955d60a5de74207c1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.1+2"
+  image_picker_platform_interface:
+    dependency: transitive
+    description:
+      name: image_picker_platform_interface
+      sha256: "886d57f0be73c4b140004e78b9f28a8914a09e50c2d816bdd0520051a71236a0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.10.1"
+  image_picker_windows:
+    dependency: transitive
+    description:
+      name: image_picker_windows
+      sha256: "6ad07afc4eb1bc25f3a01084d28520496c4a3bb0cb13685435838167c9dcedeb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.1+1"
   io:
     dependency: transitive
     description:
@@ -558,7 +694,7 @@ packages:
     source: hosted
     version: "2.2.0"
   path:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: path
       sha256: "087ce49c3f0dc39180befefc60fdb4acd8f8620e5682fe2476afd0b3688bb4af"
@@ -573,6 +709,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
+  path_provider:
+    dependency: "direct main"
+    description:
+      name: path_provider
+      sha256: "50c5dd5b6e1aaf6fb3a78b33f6aa3afca52bf903a8a5298f53101fdaee55bbcd"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.5"
+  path_provider_android:
+    dependency: transitive
+    description:
+      name: path_provider_android
+      sha256: "4adf4fd5423ec60a29506c76581bc05854c55e3a0b72d35bb28d661c9686edf2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.15"
+  path_provider_foundation:
+    dependency: transitive
+    description:
+      name: path_provider_foundation
+      sha256: "4843174df4d288f5e29185bd6e72a6fbdf5a4a4602717eed565497429f179942"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.1"
   path_provider_linux:
     dependency: transitive
     description:
@@ -842,6 +1002,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.2"
+  transparent_image:
+    dependency: transitive
+    description:
+      name: transparent_image
+      sha256: e8991d955a2094e197ca24c645efec2faf4285772a4746126ca12875e54ca02f
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1"
   typed_data:
     dependency: transitive
     description:
@@ -882,6 +1050,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
+  video_editor:
+    dependency: "direct main"
+    description:
+      name: video_editor
+      sha256: "263be52e052118389f372f055f59c2fda5c7beecfdb706b899d2e05be8740c22"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   video_player:
     dependency: "direct main"
     description:
@@ -922,6 +1098,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.5"
+  video_thumbnail:
+    dependency: transitive
+    description:
+      name: video_thumbnail
+      sha256: "3455c189d3f0bb4e3fc2236475aa84fe598b9b2d0e08f43b9761f5bc44210016"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.3"
   vm_service:
     dependency: transitive
     description:
@@ -962,6 +1146,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.3"
+  win32:
+    dependency: transitive
+    description:
+      name: win32
+      sha256: daf97c9d80197ed7b619040e86c8ab9a9dad285e7671ee7390f9180cc828a51e
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.10.1"
   xdg_directories:
     dependency: transitive
     description:
