@@ -1,33 +1,89 @@
+// import 'package:flutter/material.dart';
+// import 'package:video_player/video_player.dart';
+// import 'package:path_provider/path_provider.dart';
 // import 'dart:io';
-// import 'package:ffmpeg_kit_flutter_new/ffmpeg_kit.dart';
-// import 'package:path_provider/path_provider.dart'; // Ensure this import is present
-// import 'package:path/path.dart' as path;
-// import 'package:video_editor_2/domain/bloc/controller.dart';
 
-// // Assuming the VideoEditorController class is part of this package
-// extension VideoEditorControllerExtension on VideoEditorController {
-//   // Define the trimmedStart and trimmedEnd getters
-//   Duration get trimmedStart => Duration.zero; // Replace with actual logic
-//   Duration get trimmedEnd => const Duration(seconds: 10); // Replace with actual logic
+// class VideoEditorScreen extends StatefulWidget {
+//   final String videoPath;
+
+//   const VideoEditorScreen({super.key, required this.videoPath});
+
+//   @override
+//   State<VideoEditorScreen> createState() => _VideoEditorScreenState();
 // }
 
-// Future<File?> exportTrimmedVideo(VideoEditorController controller) async {
-//   final start = controller.trimmedStart;
-//   final end = controller.trimmedEnd;
-//   final duration = end - start;
+// class _VideoEditorScreenState extends State<VideoEditorScreen> {
+//   late VideoPlayerController _controller;
+//   double start = 0;
+//   double end = 10;
 
-//   final inputPath = controller.file.path;
-//   final directory = await getTemporaryDirectory();
-//   final outputPath = path.join(directory.path, 'trimmed_video.mp4');
+//   @override
+//   void initState() {
+//     super.initState();
+//     _controller = VideoPlayerController.file(File(widget.videoPath))
+//       ..initialize().then((_) {
+//         setState(() {
+//           end = _controller.value.duration.inSeconds.toDouble();
+//         });
+//         _controller.play();
+//       });
+//   }
 
-//   final command = '-ss $start -i "$inputPath" -t $duration -c copy "$outputPath"';
+//   Future<void> trimVideo() async {
+//     final dir = await getTemporaryDirectory();
+//     final outputPath = '${dir.path}/trimmed_${DateTime.now().millisecondsSinceEpoch}.mp4';
 
-//   final session = await FFmpegKit.execute(command);
-//   final returnCode = await session.getReturnCode();
+//     final command =
+//         '-i "${widget.videoPath}" -ss $start -to $end -c copy "$outputPath"';
 
-//   if (returnCode?.isValueSuccess() ?? false) {
-//     return File(outputPath);
-//   } else {
-//     return null;
+//     await FFmpegKit.execute(command);
+
+//     ScaffoldMessenger.of(context).showSnackBar(
+//       SnackBar(content: Text("تم قص الفيديو: $outputPath")),
+//     );
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: const Text('تعديل الفيديو')),
+//       body: Column(
+//         children: [
+//           if (_controller.value.isInitialized)
+//             AspectRatio(
+//               aspectRatio: _controller.value.aspectRatio,
+//               child: VideoPlayer(_controller),
+//             ),
+//           Slider(
+//             min: 0,
+//             max: _controller.value.duration.inSeconds.toDouble(),
+//             value: start,
+//             onChanged: (v) {
+//               setState(() => start = v);
+//             },
+//             label: "بداية: ${start.toInt()} ث",
+//           ),
+//           Slider(
+//             min: start,
+//             max: _controller.value.duration.inSeconds.toDouble(),
+//             value: end,
+//             onChanged: (v) {
+//               setState(() => end = v);
+//             },
+//             label: "نهاية: ${end.toInt()} ث",
+//           ),
+//           ElevatedButton(
+//             onPressed: trimVideo,
+//             child: const Text("قص الفيديو"),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+
+//   @override
+//   void dispose() {
+//     _controller.dispose();
+//     super.dispose();
 //   }
 // }
