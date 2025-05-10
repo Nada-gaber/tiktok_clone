@@ -30,7 +30,7 @@ class _NavScreenState extends State<NavScreen> {
       const HomeScreen(),
       const HomeScreen(),
       const HomeScreen(),
-      user == null ? const NotLoggedInProfile() : const ProfileScreen(),
+      user == null ?const ProfileScreen()  :const NotLoggedInProfile() ,
     ];
   }
 
