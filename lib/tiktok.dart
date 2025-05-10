@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone/core/routing/app_router.dart';
 import 'package:tiktok_clone/core/themes/colors.dart';
@@ -12,14 +11,13 @@ class Tiktok extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser;
     return MaterialApp(
       theme: ThemeData(
         brightness: Brightness.light,
         scaffoldBackgroundColor: AppColors.backgroundLightGray,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: user != null ? Routes.navBar : Routes.login,
+      initialRoute: Routes.navBar,
       onGenerateRoute: appRouter.generateRoute,
     );
   }
