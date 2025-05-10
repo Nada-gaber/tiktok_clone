@@ -1,36 +1,36 @@
 import 'package:flutter/material.dart';
-import '../../../../core/themes/colors.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:tiktok_clone/core/widgets/shared_button.dart';
 
 class CustomUploadButton extends StatelessWidget {
   const CustomUploadButton({super.key});
-void _pickAndEditVideo(BuildContext context) async {
-  // final result = await FilePicker.platform.pickFiles(type: FileType.video);
 
-  // if (result != null && result.files.single.path != null) {
-  //   final videoPath = result.files.single.path!;
-    
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(
-    //     builder: (_) => VideoEditorScreen(videoPath: videoPath),
-    //   ),
-    // );
-//   }
- }
+  void _pickImage(BuildContext context) async {
+    final ImagePicker _picker = ImagePicker();
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+
+    if (image != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Image selected: ${image.name}'),
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('No image selected'),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialButton(
-      onPressed: () => _pickAndEditVideo(context),
-      color: AppColors.buttonColor,
-      elevation: 0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      child: const Padding(
-        padding: EdgeInsets.all(10.0),
-        child: Text(
-          'Upload',
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
+    return CustomButtonWidget(
+      onPressed: () => _pickImage(context),
+      buttonText: 'Upload Image',
+      padding: 0,
+      minWidth: 100,
     );
   }
 }
