@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tiktok_clone/core/themes/colors.dart';
 import 'package:tiktok_clone/features/profile/presentation/screens/profile.dart';
 import '../../../../core/themes/images.dart';
+import '../../../profile/presentation/screens/not_logged_in_profile.dart';
 import 'reels_video.dart';
 import 'home_screen.dart';
 
@@ -15,15 +17,22 @@ class NavScreen extends StatefulWidget {
 
 class _NavScreenState extends State<NavScreen> {
   int _selectedIndex = 0;
+  final user = FirebaseAuth.instance.currentUser;
 
   // List of screens for navigation
-  final List<Widget> _screens = [
-    const ReelsVideo(),
-    const HomeScreen(),
-    const HomeScreen(),
-    const HomeScreen(),
-    const ProfileScreen(),
-  ];
+  late List<Widget> _screens;
+
+  @override
+  void initState() {
+    super.initState();
+    _screens = [
+      const ReelsVideo(),
+      const HomeScreen(),
+      const HomeScreen(),
+      const HomeScreen(),
+      user == null ?const ProfileScreen()  :const NotLoggedInProfile() ,
+    ];
+  }
 
   void _onItemTapped(int index) {
     if (index == 2) return; // Ignore index for Upload button

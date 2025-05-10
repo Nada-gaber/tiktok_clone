@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tiktok_clone/core/themes/colors.dart';
 import 'package:tiktok_clone/features/profile/presentation/widgets/profile_insights_details_row.dart';
-
 import '../../../../core/themes/font_weight_helper.dart';
 import '../../../../core/themes/images.dart';
+import '../widgets/row_buttons_profile.dart';
+import '../widgets/tab_bar_views_profile.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -65,34 +65,7 @@ class _ProfileScreenState extends State<ProfileScreen>
               ],
             ),
             const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                MaterialButton(
-                  onPressed: () {
-                    print('Edit Profile');
-                  },
-                  color: AppColors.buttonSecondaryColor,
-                  elevation: 0,
-                  child: const Text(
-                    'Edit Profile',
-                    style: AppFonts.semiBold,
-                  ),
-                ),
-                const SizedBox(width: 20),
-                MaterialButton(
-                  onPressed: () {
-                    print('Edit Profile');
-                  },
-                  color: AppColors.buttonSecondaryColor,
-                  elevation: 0,
-                  child: const Text(
-                    'Share Profile',
-                    style: AppFonts.semiBold,
-                  ),
-                ),
-              ],
-            ),
+            const RowButtonProfile(),
             const SizedBox(height: 20),
             TabBar(
               controller: _tabController,
@@ -103,6 +76,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                 Tab(icon: Icon(Icons.favorite_border)),
               ],
             ),
+            TabBarViewProfileTabs(tabController: _tabController),
           ],
         ),
       ),

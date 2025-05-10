@@ -7,9 +7,12 @@ class AppAssets {
   static const String inboxIcon = 'assets/icons/navbar/inbox.svg';
   static const String profileIcon = 'assets/icons/navbar/profile.svg';
 
-//Reels Icons
+  // Reels Icons
   static const String heartIcon = 'assets/icons/reels/Heart Icon.svg';
   static const String commentIcon = 'assets/icons/reels/Message Icon.svg';
   static const String shareIcon = 'assets/icons/reels/Share Icon.svg';
+
+  // Profile Icons
+  static const String imageGallery = 'assets/icons/profile/image-gallery.svg';
 
 }
