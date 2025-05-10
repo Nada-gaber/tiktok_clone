@@ -1,11 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+import 'package:tiktok_clone/features/profile/presentation/widgets/upload_assets_button.dart';
 import '../../../../core/themes/colors.dart';
 import '../../../../core/themes/font_weight_helper.dart';
 import '../../../../core/themes/images.dart';
-import 'upload_assets_button.dart';
 
 class TabBarViewProfileTabs extends StatelessWidget {
   const TabBarViewProfileTabs({
@@ -22,8 +20,8 @@ class TabBarViewProfileTabs extends StatelessWidget {
         controller: _tabController,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: 62.0, vertical: 55.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 62.0, vertical: 55.0),
             child: Column(
               children: [
                 SvgPicture.asset(
@@ -38,7 +36,8 @@ class TabBarViewProfileTabs extends StatelessWidget {
                   style: AppFonts.bold,
                 ),
                 const SizedBox(height: 20),
-              //  const CustomUploadButton(),
+               const CustomUploadButton()
+
               ],
             ),
           ),
