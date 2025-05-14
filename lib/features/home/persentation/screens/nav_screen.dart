@@ -27,10 +27,10 @@ class _NavScreenState extends State<NavScreen> {
     super.initState();
     _screens = [
       const ReelsVideo(),
+      user == null ? const NotLoggedInProfile() : const HomeScreen(),
       const HomeScreen(),
-      const HomeScreen(),
-      const HomeScreen(),
-      user == null ?const ProfileScreen()  :const NotLoggedInProfile() ,
+      user == null ? const NotLoggedInProfile() : const HomeScreen(),
+      user == null ? const NotLoggedInProfile() : const ProfileScreen(),
     ];
   }
 

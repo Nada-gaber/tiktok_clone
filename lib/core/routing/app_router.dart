@@ -19,7 +19,7 @@ class AppRouter {
         );
         case Routes.register:
         return MaterialPageRoute(
-          builder: (context) => const RegisterScreen(),
+          builder: (context) => const RegisterSheet(),
         );
     }
     return null;
