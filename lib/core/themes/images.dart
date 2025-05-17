@@ -15,4 +15,7 @@ class AppAssets {
   // Profile Icons
   static const String imageGallery = 'assets/icons/profile/image-gallery.svg';
 
+
+// logo 
+static const String tiktokLogo = 'assets/logo.png';
 }
