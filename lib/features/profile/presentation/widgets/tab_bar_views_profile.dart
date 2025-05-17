@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tiktok_clone/features/profile/presentation/widgets/upload_assets_button.dart';
 
+import '../../../../core/themes/colors.dart';
 import '../../../../core/themes/font_weight_helper.dart';
+import '../../../../core/themes/images.dart';
 import '../../../posts/data/model/post_model.dart';
 import '../screens/post_details_viewer.dart';
 
@@ -37,10 +40,17 @@ class _TabBarViewProfileTabsState extends State<TabBarViewProfileTabs> {
                 Expanded(
                   child: _posts.isEmpty
                       ? Padding(
-                          padding: const EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 62.0, vertical: 55.0),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              SvgPicture.asset(
+                                AppAssets.imageGallery,
+                                width: 60,
+                                color: AppColors.textSecondary,
+                              ),
+                              const SizedBox(height: 10),
                               const Text(
                                 'What are some good photos you\'ve taken recently?',
                                 textAlign: TextAlign.center,
