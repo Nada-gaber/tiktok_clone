@@ -2,11 +2,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tiktok_clone/core/themes/colors.dart';
+import 'package:tiktok_clone/features/home/persentation/helpers/post_helper.dart';
 import 'package:tiktok_clone/features/profile/presentation/screens/profile.dart';
 import '../../../../core/themes/images.dart';
+import '../../../posts/data/model/post_model.dart';
 import '../../../profile/presentation/screens/not_logged_in_profile.dart';
 import 'reels_video.dart';
 import 'home_screen.dart';
+
 
 class NavScreen extends StatefulWidget {
   const NavScreen({super.key});
@@ -38,6 +41,14 @@ class _NavScreenState extends State<NavScreen> {
     if (index == 2) return; // Ignore index for Upload button
     setState(() {
       _selectedIndex = index;
+    });
+  }
+
+  final List<Post> _posts = [];
+
+  void _addNewPost(Post post) {
+    setState(() {
+      _posts.insert(0, post); // Add at the top
     });
   }
 
@@ -116,9 +127,9 @@ class _NavScreenState extends State<NavScreen> {
   // Special Floating Upload Button
   Widget _uploadButton() {
     return GestureDetector(
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => const HomeScreen()),
+      onTap: () => pickImageAndCreatePost(
+        context: context,
+        onPostCreated: _addNewPost,
       ),
       child: SvgPicture.asset(
         AppAssets.addButton,
