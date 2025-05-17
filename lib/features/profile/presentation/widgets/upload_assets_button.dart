@@ -1,36 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:tiktok_clone/core/widgets/shared_button.dart';
+import '../../../../core/widgets/shared_button.dart';
+import '../../../home/persentation/helpers/post_helper.dart';
+import '../../../posts/data/model/post_model.dart';
+
+
+typedef OnPostCreated = void Function(Post post);
 
 class CustomUploadButton extends StatelessWidget {
-  const CustomUploadButton({super.key});
+  final OnPostCreated onPostCreated;
 
-  void _pickImage(BuildContext context) async {
-    final ImagePicker _picker = ImagePicker();
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+  const CustomUploadButton({super.key, required this.onPostCreated});
 
-    if (image != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Image selected: ${image.name}'),
-        ),
-      );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('No image selected'),
-        ),
-      );
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     return CustomButtonWidget(
-      onPressed: () => _pickImage(context),
-      buttonText: 'Upload Image',
-      padding: 0,
-      minWidth: 100,
+      onPressed: () => pickImageAndCreatePost(
+        context: context,
+        onPostCreated: onPostCreated,
+      ),
+      buttonText: 'Create Post',
     );
   }
 }

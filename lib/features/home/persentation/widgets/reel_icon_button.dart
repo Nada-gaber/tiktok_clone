@@ -11,10 +11,12 @@ class ReelIconButton extends StatelessWidget {
     super.key,
     required this.iconString,
     required this.assetName,
+    this.color = Colors.white,
   });
 
   final String? iconString;
   final String? assetName;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class ReelIconButton extends StatelessWidget {
           onPressed: () => log('Liked!'),
           icon: SvgPicture.asset(
             assetName ?? AppAssets.heartIcon,
-            colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            colorFilter:  ColorFilter.mode(color ?? Colors.white, BlendMode.srcIn),
             width: 45,
             height: 45,
           ),
