@@ -17,13 +17,9 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => const NavScreen(),
         );
-        case Routes.login:
-        return MaterialPageRoute(
-          builder: (context) => const LoginScreen(),
-        );
         case Routes.register:
         return MaterialPageRoute(
-          builder: (context) => const RegisterScreen(),
+          builder: (context) => const RegisterSheet(),
         );
     }
     return null;

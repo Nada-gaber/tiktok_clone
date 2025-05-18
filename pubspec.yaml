@@ -34,6 +34,7 @@ dependencies:
   firebase_auth: ^5.5.2
   # video_editor_2: ^3.1.1
   image_picker: ^1.1.2
+  path_provider: ^2.1.5
   # ffmpeg_kit_flutter_new: ^1.2.0
   # path_provider: ^2.1.5
 
@@ -78,3 +79,4 @@ flutter:
     - assets/icons/reels/
     - assets/icons/profile/
     - .tiktok.env
+    - assets/
