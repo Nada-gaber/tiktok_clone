@@ -35,6 +35,9 @@ dependencies:
   # video_editor_2: ^3.1.1
   image_picker: ^1.1.2
   path_provider: ^2.1.5
+  firebase_storage: ^12.4.5
+  cloud_firestore: ^5.6.7
+  equatable: ^2.0.7
   # ffmpeg_kit_flutter_new: ^1.2.0
   # path_provider: ^2.1.5
 
