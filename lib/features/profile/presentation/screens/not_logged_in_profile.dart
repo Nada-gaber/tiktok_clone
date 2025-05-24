@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tiktok_clone/core/themes/colors.dart';
 
 import '../../../../core/themes/images.dart';
 import '../../../../core/widgets/shared_button.dart';
 import '../../../auth/presentation/screens/login_screen.dart';
+import '../../logic/cubit/auth/auth_cubit.dart';
 
 class NotLoggedInProfile extends StatelessWidget {
   const NotLoggedInProfile({super.key});
@@ -44,7 +46,10 @@ class NotLoggedInProfile extends StatelessWidget {
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
                 ),
-                builder: (context) => const LoginSheet(),
+                builder: (context) => BlocProvider(
+                  create: (context) => AuthCubit(),
+                  child: const LoginSheet(),
+                ),
               );
             },
             buttonText: 'Login',
