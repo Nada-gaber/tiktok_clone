@@ -1,9 +1,10 @@
 import 'dart:developer';
-import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:tiktok_clone/core/themes/colors.dart';
-import 'package:tiktok_clone/features/auth/presentation/screens/register_screen.dart';
-import '../../../../core/themes/font_weight_helper.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../profile/logic/cubit/auth/auth_cubit.dart';
 
 class LoginSheet extends StatefulWidget {
   const LoginSheet({super.key});
@@ -21,120 +22,112 @@ class _LoginSheetState extends State<LoginSheet> {
     try {
       final userCredential =
           await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
       );
-      log("User logged in: ${userCredential.user?.email}");
-      Navigator.pop(context); // close the bottom sheet after successful login
+      final user = userCredential.user;
+      if (user != null) {
+        // Check if user profile exists in Firestore, create if not
+        final doc =
+            await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
+        if (!doc.exists) {
+          await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+            'uid': user.uid,
+            'email': user.email,
+            'displayName': user.email!.split('@')[0],
+            'photoURL': '',
+            'createdAt': DateTime.now().toIso8601String(),
+          });
+        }
+        log("User logged in: ${user.email}");
+        context.read<AuthCubit>().checkAuth();
+        Navigator.pop(context);
+      }
     } catch (e) {
       log("Error: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Login failed: $e")),
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: MediaQuery.of(context).viewInsets, // Handles keyboard overlap
+      padding: MediaQuery.of(context).viewInsets,
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const SizedBox(height: 54),
-              const Text("Log in to TikTok", style: AppFonts.extraBold),
-              const SizedBox(height: 10),
-              const Text(
-                "Mange your account, check notifications, comment videos, and more.",
-                style: AppFonts.light,
-                textAlign: TextAlign.center,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(height: 54),
+            const Text("Log in to TikTok", style: TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 10),
+            const Text(
+              "Manage your account, check notifications, comment videos, and more.",
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 30),
+            TextField(
+              controller: _emailController,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.email),
+                labelText: "Email",
+                hintText: "Enter your email",
               ),
-              const SizedBox(height: 30),
-              TextField(
-                controller: _emailController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.email),
-                  labelText: "Email",
-                  hintText: "Enter your email",
-                ),
-              ),
-              const SizedBox(height: 20),
-              TextField(
-                controller: _passwordController,
-                obscureText: !_isPasswordVisible,
-                decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
-                  prefixIcon: const Icon(Icons.lock),
-                  labelText: "Password",
-                  hintText: "Enter your password",
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      _isPasswordVisible
-                          ? Icons.visibility
-                          : Icons.visibility_off,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _isPasswordVisible = !_isPasswordVisible;
-                      });
-                    },
+            ),
+            const SizedBox(height: 20),
+            TextField(
+              controller: _passwordController,
+              obscureText: !_isPasswordVisible,
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                prefixIcon: const Icon(Icons.lock),
+                labelText: "Password",
+                hintText: "Enter your password",
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
                   ),
+                  onPressed: () {
+                    setState(() {
+                      _isPasswordVisible = !_isPasswordVisible;
+                    });
+                  },
                 ),
               ),
-              Align(
-                alignment: Alignment.topLeft,
-                child: TextButton(
-                  onPressed: () {},
-                  child: const Text("Forgot Password?", style: AppFonts.light),
-                ),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: login,
-                style: ElevatedButton.styleFrom(
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(0),
-                  ),
-                  backgroundColor: Colors.pink,
-                  minimumSize: const Size.fromHeight(50),
-                ),
-                child: const Text("Login", style: AppFonts.button),
-              ),
-              const SizedBox(height: 40),
-              TextButton(
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: TextButton(
                 onPressed: () {
-                  Navigator.pop(context); // Close current bottom sheet
-                  showModalBottomSheet(
-                    context: context,
-                    isScrollControlled: true,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(16)),
-                    ),
-                    builder: (context) =>
-                        const RegisterSheet(), // or LoginSheet
-                  );
+                  // Implement forgot password
                 },
-                child: RichText(
-                  text: TextSpan(
-                    style:
-                        AppFonts.button.copyWith(color: AppColors.textPrimary),
-                    children: [
-                      const TextSpan(text: "Don't have an account? "),
-                      TextSpan(
-                        text: "Sign up",
-                        style: AppFonts.button
-                            .copyWith(color: AppColors.buttonColor),
-                      ),
-                    ],
-                  ),
-                ),
+                child: const Text("Forgot Password?"),
               ),
-            ],
-          ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: login,
+              style: ElevatedButton.styleFrom(
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(0),
+                ),
+                backgroundColor: Colors.pink,
+                minimumSize: const Size.fromHeight(50),
+              ),
+              child: const Text("Login"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                // Show register sheet (implement separately)
+              },
+              child: const Text("Don't have an account? Register"),
+            ),
+          ],
         ),
       ),
     );
