@@ -1,10 +1,9 @@
 import 'dart:developer';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:tiktok_clone/core/themes/colors.dart';
+import 'login_screen.dart';
 
-import '../../../../core/themes/font_weight_helper.dart';
 class RegisterSheet extends StatefulWidget {
   const RegisterSheet({super.key});
 
@@ -15,19 +14,34 @@ class RegisterSheet extends StatefulWidget {
 class _RegisterSheetState extends State<RegisterSheet> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _nameController = TextEditingController();
   bool _isPasswordVisible = false;
 
   Future<void> register() async {
     try {
       final userCredential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
       );
-      log("User registered: ${userCredential.user?.email}");
-      Navigator.pop(context); // Close the sheet after registration
+      final user = userCredential.user;
+      if (user != null) {
+        await user.updateDisplayName(_nameController.text.trim());
+        await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+          'uid': user.uid,
+          'email': user.email,
+          'displayName': _nameController.text.trim(),
+          'photoURL': '',
+          'createdAt': DateTime.now().toIso8601String(),
+        });
+        log("User registered: ${user.email}");
+        Navigator.pop(context);
+      }
     } catch (e) {
       log("Error: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Registration failed: $e")),
+      );
     }
   }
 
@@ -40,8 +54,23 @@ class _RegisterSheetState extends State<RegisterSheet> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const SizedBox(height: 16),
-            const Text("Sign Up", style: AppFonts.extraBold),
+            const SizedBox(height: 54),
+            const Text("Register for TikTok", style: TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 10),
+            const Text(
+              "Create an account to start sharing videos.",
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 30),
+            TextField(
+              controller: _nameController,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.person),
+                labelText: "Display Name",
+                hintText: "Enter your name",
+              ),
+            ),
             const SizedBox(height: 20),
             TextField(
               controller: _emailController,
@@ -63,9 +92,7 @@ class _RegisterSheetState extends State<RegisterSheet> {
                 hintText: "Enter your password",
                 suffixIcon: IconButton(
                   icon: Icon(
-                    _isPasswordVisible
-                        ? Icons.visibility
-                        : Icons.visibility_off,
+                    _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
                   ),
                   onPressed: () {
                     setState(() {
@@ -73,16 +100,6 @@ class _RegisterSheetState extends State<RegisterSheet> {
                     });
                   },
                 ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: TextButton(
-                onPressed: () {},
-                child: Text("Forgot Password?",
-                    style: AppFonts.regular.copyWith(
-                      color: AppColors.textPrimary,
-                    )),
               ),
             ),
             const SizedBox(height: 20),
@@ -96,7 +113,22 @@ class _RegisterSheetState extends State<RegisterSheet> {
                 backgroundColor: Colors.pink,
                 minimumSize: const Size.fromHeight(50),
               ),
-              child: const Text("Sign Up", style: AppFonts.button),
+              child: const Text("Register"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                showModalBottomSheet(
+                  backgroundColor: Colors.grey[100],
+                  context: context,
+                  isScrollControlled: true,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                  ),
+                  builder: (context) => const LoginSheet(),
+                );
+              },
+              child: const Text("Already have an account? Login"),
             ),
           ],
         ),

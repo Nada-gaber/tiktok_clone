@@ -1,15 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tiktok_clone/core/themes/colors.dart';
 import 'package:tiktok_clone/features/home/persentation/helpers/post_helper.dart';
 import 'package:tiktok_clone/features/profile/presentation/screens/profile.dart';
 import '../../../../core/themes/images.dart';
 import '../../../posts/data/model/post_model.dart';
+import '../../../profile/logic/cubit/auth/auth_cubit.dart';
+import '../../../profile/logic/cubit/auth/auth_state.dart';
 import '../../../profile/presentation/screens/not_logged_in_profile.dart';
 import 'reels_video.dart';
 import 'home_screen.dart';
-
 
 class NavScreen extends StatefulWidget {
   const NavScreen({super.key});
@@ -33,7 +35,16 @@ class _NavScreenState extends State<NavScreen> {
       user == null ? const NotLoggedInProfile() : const HomeScreen(),
       const HomeScreen(),
       user == null ? const NotLoggedInProfile() : const HomeScreen(),
-      user == null ? const NotLoggedInProfile() : const ProfileScreen(),
+      BlocBuilder<AuthCubit, AuthState>(
+        builder: (context, state) {
+          return state.maybeWhen(
+              authenticated: (user) =>
+                  user == null ? const ProfileScreen() : const ProfileScreen(),
+              orElse: () {
+                return const NotLoggedInProfile();
+              });
+        },
+      ),
     ];
   }
 
