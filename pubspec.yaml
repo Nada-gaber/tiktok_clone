@@ -52,6 +52,8 @@ flutter_launcher_icons:
   image_path: "assets/icons/icon.png"
   min_sdk_android: 21
 
+
+
   freezed: ^2.3.5
   flutter_lints: ^4.0.0
   build_runner: ^2.4.13
