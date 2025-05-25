@@ -38,12 +38,19 @@ dependencies:
   firebase_storage: ^12.4.5
   cloud_firestore: ^5.6.7
   equatable: ^2.0.7
+  flutter_launcher_icons: ^0.14.3
   # ffmpeg_kit_flutter_new: ^1.2.0
   # path_provider: ^2.1.5
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_launcher_icons:
+  android: "ic_launcher"
+  ios: true
+  image_path: "assets/icons/icon.png"
+  min_sdk_android: 21
 
   freezed: ^2.3.5
   flutter_lints: ^4.0.0
