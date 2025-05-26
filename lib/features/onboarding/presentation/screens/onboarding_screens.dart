@@ -27,6 +27,11 @@ class _OnboardingScreensState extends State<OnboardingScreens> {
   ];
   int get _selectedCount =>
       _selectedInterests.where((isSelected) => isSelected).length;
+  void _toggleInterest(int index) {
+    setState(() {
+      _selectedInterests[index] = !_selectedInterests[index];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,9 +54,11 @@ class _OnboardingScreensState extends State<OnboardingScreens> {
                   style: TextStyle(color: Colors.grey),
                 ),
               ),
+              const SizedBox(height: 20),
               InterestsWrapWidget(
                 interests: interests,
                 selectedInterests: _selectedInterests,
+                onInterestToggle: _toggleInterest,
               ),
               SkipNextButtonOnBoardingWidget(selectedCount: _selectedCount),
             ],
