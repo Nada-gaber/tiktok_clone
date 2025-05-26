@@ -67,4 +67,12 @@ class AppFonts {
     fontWeight: FontWeight.w700, // Bold weight for titles
     fontSize: 18.0, // Larger font size for titles
   );
+
+  
+  // Head font style for main headings or important sections
+  static const TextStyle head = TextStyle(
+    fontFamily: 'Poppins',
+    fontWeight: FontWeight.w800, 
+    fontSize: 32.0, // Larger font size for headings
+  );
 }

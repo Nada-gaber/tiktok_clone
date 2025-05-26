@@ -39,6 +39,7 @@ dependencies:
   cloud_firestore: ^5.6.7
   equatable: ^2.0.7
   flutter_launcher_icons: ^0.14.3
+  permission_handler: ^12.0.0+1
   # ffmpeg_kit_flutter_new: ^1.2.0
   # path_provider: ^2.1.5
 

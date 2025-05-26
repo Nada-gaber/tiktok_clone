@@ -1,10 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.INTERNET"/>
-<uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-<uses-permission android:name="android.permission.CAMERA"/>
-<uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-
+    
+<uses-permission android:name="android.permission.CAMERA" />
+<uses-permission android:name="android.permission.READ_MEDIA_IMAGES" /> <!-- For photos, Android 13+ -->
+<uses-permission android:name="android.permission.READ_MEDIA_VIDEO" /> <!-- For videos, Android 13+ -->
     <application
         android:label="tiktok_clone"
         android:name="${applicationName}"

@@ -18,4 +18,5 @@ class AppAssets {
 
 // logo 
 static const String tiktokLogo = 'assets/logo.png';
+static const String mediaOnboarding = 'assets/media.jpg';
 }
