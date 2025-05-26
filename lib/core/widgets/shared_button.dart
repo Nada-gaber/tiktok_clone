@@ -7,18 +7,23 @@ class CustomButtonWidget extends StatelessWidget {
   final String buttonText;
   final double padding;
   final double minWidth;
+  final Color buttonColor;
+  final Color textColor;
   const CustomButtonWidget(
       {super.key,
       required this.onPressed,
       required this.buttonText,
       this.padding = 8.0,
-      this.minWidth = 200.0});
+      this.minWidth = 200.0, 
+      this.buttonColor = AppColors.buttonColor,
+      this.textColor = Colors.white,
+      });
 
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
       onPressed: onPressed,
-      color: AppColors.buttonColor,
+      color: buttonColor,
       elevation: 0,
       minWidth: minWidth,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -26,7 +31,7 @@ class CustomButtonWidget extends StatelessWidget {
         padding: EdgeInsets.all(padding),
         child: Text(
           buttonText,
-          style: const TextStyle(color: Colors.white),
+          style:  TextStyle(color: textColor),
         ),
       ),
     );
