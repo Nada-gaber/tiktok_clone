@@ -12,7 +12,7 @@ import '../../../auth/logic/cubit/auth_cubit/auth_state.dart';
 import '../../../posts/data/model/post_model.dart';
 import '../../../profile/presentation/screens/not_logged_in_profile.dart';
 import '../../../videos/logic/video_searching_cubit.dart';
-import '../../../videos/screens/videos_searching.dart';
+import '../../../videos/presentation/screens/videos_searching.dart';
 import 'reels_video.dart';
 import 'home_screen.dart';
 
@@ -36,7 +36,7 @@ class _NavScreenState extends State<NavScreen> {
     _screens = [
       const ReelsVideo(),
       BlocProvider(
-        create: (context) => getIt<SearchVideoCubit>(),
+        create: (context) => getIt<SearchVideoCubit>()..searchVideos(),
         child: const SearchVideoScreen(),
       ),
       const HomeScreen(),
