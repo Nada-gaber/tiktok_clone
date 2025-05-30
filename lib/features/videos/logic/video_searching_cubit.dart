@@ -35,9 +35,11 @@ class SearchVideoCubit extends Cubit<SearchVideoState> {
                   .contains(query.toLowerCase()) ??
                   false)
               .toList();
-
+      if (isClosed) return; 
       emit(SearchVideoState.loaded(filteredVideos));
     } catch (e) {
+      
+      if (isClosed) return; 
       emit(SearchVideoState.error(e.toString()));
     }
   }
