@@ -5,11 +5,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tiktok_clone/core/themes/colors.dart';
 import 'package:tiktok_clone/features/home/persentation/helpers/post_helper.dart';
 import 'package:tiktok_clone/features/profile/presentation/screens/profile.dart';
+import '../../../../core/di/dependency_injection.dart';
 import '../../../../core/themes/images.dart';
 import '../../../auth/logic/cubit/auth_cubit/auth_cubit.dart';
 import '../../../auth/logic/cubit/auth_cubit/auth_state.dart';
 import '../../../posts/data/model/post_model.dart';
 import '../../../profile/presentation/screens/not_logged_in_profile.dart';
+import '../../../videos/logic/video_searching_cubit.dart';
+import '../../../videos/screens/videos_searching.dart';
 import 'reels_video.dart';
 import 'home_screen.dart';
 
@@ -32,7 +35,10 @@ class _NavScreenState extends State<NavScreen> {
     super.initState();
     _screens = [
       const ReelsVideo(),
-      user == null ? const NotLoggedInProfile() : const HomeScreen(),
+      BlocProvider(
+        create: (context) => getIt<SearchVideoCubit>(),
+        child: const SearchVideoScreen(),
+      ),
       const HomeScreen(),
       user == null ? const NotLoggedInProfile() : const HomeScreen(),
       BlocBuilder<AuthCubit, AuthState>(
