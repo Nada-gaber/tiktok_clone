@@ -22,9 +22,20 @@ class _PexelsApi implements PexelsApi {
 
 
   @override
-  Future<PixabayResponse> getCuratedPhotos(String apiKey) async {
+  Future<PixabayResponse> getCuratedPhotos(
+    String apiKey, {
+    String? query,
+    String? category,
+    String? videoType,
+  }) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'key': apiKey};
+    final queryParameters = <String, dynamic>{
+      r'key': apiKey,
+      r'q': query,
+      r'category': category,
+      r'video_type': videoType,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<PixabayResponse>(Options(
