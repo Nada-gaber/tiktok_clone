@@ -1,7 +1,7 @@
 import 'package:get_it/get_it.dart';
 
-import '../../features/profile/data/repo/video_repo.dart';
-import '../../features/profile/logic/cubit/video/videos_cubit.dart';
+import '../../features/home/data/repo/video_repo.dart';
+import '../../features/home/logic/cubit/video/videos_cubit.dart';
 import '../networking/api_services.dart';
 import '../networking/dio_factory.dart';
 
