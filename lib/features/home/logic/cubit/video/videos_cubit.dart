@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tiktok_clone/features/profile/data/repo/video_repo.dart';
-import 'package:tiktok_clone/features/profile/logic/cubit/video/video_state.dart';
+import 'package:tiktok_clone/features/home/data/repo/video_repo.dart';
+import 'package:tiktok_clone/features/home/logic/cubit/video/video_state.dart';
 
 
 class VideoCubit extends Cubit<VideoState> {

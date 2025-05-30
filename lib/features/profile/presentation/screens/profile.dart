@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tiktok_clone/features/profile/logic/cubit/auth/auth_cubit.dart';
-import '../../logic/cubit/auth/auth_state.dart';
+import '../../../auth/logic/cubit/auth_cubit/auth_cubit.dart';
+import '../../../auth/logic/cubit/auth_cubit/auth_state.dart';
 import '../widgets/profile_insights_details_row.dart';
 import '../widgets/tab_bar_views_profile.dart';
 import 'edit_profile.dart';
