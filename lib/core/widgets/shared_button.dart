@@ -18,7 +18,7 @@ class CustomButtonWidget extends StatelessWidget {
     this.minWidth = 200.0,
     this.buttonColor = AppColors.buttonColor,
     this.textColor = Colors.white,
-    this.buttonHeight = 0.0,
+    this.buttonHeight = 45.0,
   });
 
   @override
