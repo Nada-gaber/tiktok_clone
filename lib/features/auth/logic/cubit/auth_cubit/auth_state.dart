@@ -1,8 +1,9 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../../data/models/user_model.dart';
+import '../../../../profile/data/models/user_model.dart';
 
 part 'auth_state.freezed.dart';
 part 'auth_state.g.dart';
+
 
 @freezed
 class AuthState with _$AuthState {
