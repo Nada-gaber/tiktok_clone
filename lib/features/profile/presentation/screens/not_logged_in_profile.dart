@@ -5,8 +5,8 @@ import 'package:tiktok_clone/core/themes/colors.dart';
 
 import '../../../../core/themes/images.dart';
 import '../../../../core/widgets/shared_button.dart';
+import '../../../auth/logic/cubit/auth_cubit/auth_cubit.dart';
 import '../../../auth/presentation/screens/login_screen.dart';
-import '../../logic/cubit/auth/auth_cubit.dart';
 
 class NotLoggedInProfile extends StatelessWidget {
   const NotLoggedInProfile({super.key});
