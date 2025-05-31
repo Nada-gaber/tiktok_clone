@@ -1,12 +1,11 @@
-
 import 'dart:io';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:tiktok_clone/core/widgets/shared_button.dart';
+import '../../../../core/themes/colors.dart';
 import '../../data/models/user_model.dart';
-
+import '../helper/update_profile.dart';
+import '../widgets/profile_image_widget.dart';
 
 class EditProfileScreen extends StatefulWidget {
   final UserModel user;
@@ -21,6 +20,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final _nameController = TextEditingController();
   File? _imageFile;
   bool _hasChanges = false;
+  final _profileService = ProfileService(); 
 
   @override
   void initState() {
@@ -49,40 +49,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   Future<void> _updateProfile() async {
     try {
-      String? photoURL = widget.user.photoURL;
-      if (_imageFile != null) {
-        final storageRef = FirebaseStorage.instance
-            .ref()
-            .child('profilePictures/${widget.user.uid}');
-        await storageRef.putFile(_imageFile!);
-        photoURL = await storageRef.getDownloadURL();
-      }
-
-      final newName = _nameController.text.trim().isEmpty
-          ? widget.user.displayName
-          : _nameController.text.trim();
-
-      // Update Firestore
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(widget.user.uid)
-          .update({
-        'displayName': newName,
-        'photoURL': photoURL,
-      });
-
-      // Update Firebase Auth
-      await FirebaseAuth.instance.currentUser?.updateDisplayName(newName);
-      if (photoURL != null) {
-        await FirebaseAuth.instance.currentUser?.updatePhotoURL(photoURL);
-      }
-
-      // Create updated UserModel
-      final updatedUser = UserModel(
+      final updatedUser = await _profileService.updateProfile(
         uid: widget.user.uid,
-        displayName: newName,
-        photoURL: photoURL,
-        email: widget.user.email, // Preserve email
+        currentDisplayName: widget.user.displayName,
+        newDisplayName: _nameController.text,
+        imageFile: _imageFile,
+        currentPhotoURL: widget.user.photoURL,
       );
 
       ScaffoldMessenger.of(context).showSnackBar(
@@ -93,7 +65,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       Navigator.pop(context, updatedUser);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error updating profile: $e')),
+        SnackBar(content: Text('$e')),
       );
     }
   }
@@ -113,48 +85,39 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(height: 20),
-              Stack(
-                alignment: Alignment.bottomRight,
-                children: [
-                  CircleAvatar(
-                    radius: 50,
-                    backgroundImage: _imageFile != null
-                        ? FileImage(_imageFile!)
-                        : (widget.user.photoURL != null &&
-                                widget.user.photoURL!.isNotEmpty
-                            ? NetworkImage(widget.user.photoURL!)
-                            : const AssetImage('assets/images/default_profile.png'))
-                            as ImageProvider,
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: GestureDetector(
-                      onTap: _pickImage,
-                      child: Container(
-                        padding: const EdgeInsets.all(4),
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.pink,
-                        ),
-                        child: const Icon(
-                          Icons.edit,
-                          color: Colors.white,
-                          size: 20,
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const SizedBox(height: 20),
+                Stack(
+                  alignment: Alignment.bottomRight,
+                  children: [
+                    ProfileImageWidget(imageFile: _imageFile, widget: widget),
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: GestureDetector(
+                        onTap: _pickImage,
+                        child: Container(
+                          padding: const EdgeInsets.all(4),
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: AppColors.buttonColor,
+                          ),
+                          child: const Icon(
+                            Icons.edit,
+                            color: Colors.white,
+                            size: 20,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: TextField(
+                  ],
+                ),
+                const SizedBox(height: 10),
+                TextField(
                   controller: _nameController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
@@ -162,18 +125,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     hintText: 'Enter your name',
                   ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _hasChanges ? _updateProfile : null,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.pink,
-                  minimumSize: const Size.fromHeight(50),
+                const SizedBox(height: 20),
+                CustomButtonWidget(
+                  onPressed: _hasChanges ? _updateProfile : null,
+                  buttonText: 'Save Changes',
+                  minWidth: double.infinity,
                 ),
-                child: const Text('Save Changes'),
-              ),
-              const SizedBox(height: 20),
-            ],
+                const SizedBox(height: 20),
+              ],
+            ),
           ),
         ),
       ),
