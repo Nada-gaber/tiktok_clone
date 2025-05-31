@@ -2,6 +2,8 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:tiktok_clone/core/widgets/shared_button.dart';
+import '../../../../core/themes/colors.dart';
 import 'login_screen.dart';
 
 class RegisterSheet extends StatefulWidget {
@@ -55,7 +57,8 @@ class _RegisterSheetState extends State<RegisterSheet> {
           mainAxisSize: MainAxisSize.min,
           children: [
             const SizedBox(height: 54),
-            const Text("Register for TikTok", style: TextStyle(fontWeight: FontWeight.bold)),
+            const Text("Register for TikTok",
+                style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 10),
             const Text(
               "Create an account to start sharing videos.",
@@ -92,7 +95,9 @@ class _RegisterSheetState extends State<RegisterSheet> {
                 hintText: "Enter your password",
                 suffixIcon: IconButton(
                   icon: Icon(
-                    _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                    _isPasswordVisible
+                        ? Icons.visibility
+                        : Icons.visibility_off,
                   ),
                   onPressed: () {
                     setState(() {
@@ -103,27 +108,21 @@ class _RegisterSheetState extends State<RegisterSheet> {
               ),
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
+            CustomButtonWidget(
               onPressed: register,
-              style: ElevatedButton.styleFrom(
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(0),
-                ),
-                backgroundColor: Colors.pink,
-                minimumSize: const Size.fromHeight(50),
-              ),
-              child: const Text("Register"),
+              buttonText: "Register",
+              minWidth: double.infinity,
             ),
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
                 showModalBottomSheet(
-                  backgroundColor: Colors.grey[100],
+                  backgroundColor: AppColors.backgroundLightGray,
                   context: context,
                   isScrollControlled: true,
                   shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(16)),
                   ),
                   builder: (context) => const LoginSheet(),
                 );

@@ -3,7 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:tiktok_clone/core/themes/colors.dart';
+import 'package:tiktok_clone/core/widgets/shared_button.dart';
+import 'package:tiktok_clone/features/auth/presentation/screens/register_screen.dart';
 import '../../logic/cubit/auth_cubit/auth_cubit.dart';
 
 class LoginSheet extends StatefulWidget {
@@ -28,10 +30,15 @@ class _LoginSheetState extends State<LoginSheet> {
       final user = userCredential.user;
       if (user != null) {
         // Check if user profile exists in Firestore, create if not
-        final doc =
-            await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
+        final doc = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(user.uid)
+            .get();
         if (!doc.exists) {
-          await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(user.uid)
+              .set({
             'uid': user.uid,
             'email': user.email,
             'displayName': user.email!.split('@')[0],
@@ -61,7 +68,8 @@ class _LoginSheetState extends State<LoginSheet> {
           mainAxisSize: MainAxisSize.min,
           children: [
             const SizedBox(height: 54),
-            const Text("Log in to TikTok", style: TextStyle(fontWeight: FontWeight.bold)),
+            const Text("Log in to TikTok",
+                style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 10),
             const Text(
               "Manage your account, check notifications, comment videos, and more.",
@@ -71,7 +79,9 @@ class _LoginSheetState extends State<LoginSheet> {
             TextField(
               controller: _emailController,
               decoration: const InputDecoration(
-                border: OutlineInputBorder(),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                ),
                 prefixIcon: Icon(Icons.email),
                 labelText: "Email",
                 hintText: "Enter your email",
@@ -88,7 +98,9 @@ class _LoginSheetState extends State<LoginSheet> {
                 hintText: "Enter your password",
                 suffixIcon: IconButton(
                   icon: Icon(
-                    _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                    _isPasswordVisible
+                        ? Icons.visibility
+                        : Icons.visibility_off,
                   ),
                   onPressed: () {
                     setState(() {
@@ -108,22 +120,25 @@ class _LoginSheetState extends State<LoginSheet> {
               ),
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
+            CustomButtonWidget(
               onPressed: login,
-              style: ElevatedButton.styleFrom(
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(0),
-                ),
-                backgroundColor: Colors.pink,
-                minimumSize: const Size.fromHeight(50),
-              ),
-              child: const Text("Login"),
+              buttonText: "Login",
+              minWidth: double.infinity,
             ),
             TextButton(
               onPressed: () {
-                Navigator.pop(context);
-                // Show register sheet (implement separately)
+                     Navigator.pop(context);
+                showModalBottomSheet(
+                  backgroundColor: AppColors.backgroundLightGray,
+                  context: context,
+                  isScrollControlled: true,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                  ),
+                  builder: (context) => const RegisterSheet(),
+                );
+
+              
               },
               child: const Text("Don't have an account? Register"),
             ),
