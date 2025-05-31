@@ -41,7 +41,7 @@ class _TabBarViewProfileTabsState extends State<TabBarViewProfileTabs> {
                   child: _posts.isEmpty
                       ? Padding(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 62.0, vertical: 55.0),
+                              horizontal: 62.0, vertical: 33.0),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

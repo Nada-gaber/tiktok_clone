@@ -2,10 +2,9 @@ flutter_native_splash:
   android: true
   ios: true
   color: "#121212"
-  image: assets/icons/icon.png
+  image: assets/icons/splash_icon.png
   android_12:
-    background_legacy: true
     color: "#121212"
-    image: assets/icons/icon.png
+    image: assets/icons/splash_icon.png
 
 

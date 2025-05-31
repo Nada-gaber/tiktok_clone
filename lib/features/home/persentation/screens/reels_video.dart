@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/di/dependency_injection.dart';
 import '../../../../core/themes/images.dart';
+import '../../../../core/widgets/loading_tiktok_widget.dart';
 import '../../logic/cubit/video/video_state.dart';
 import '../../logic/cubit/video/videos_cubit.dart';
 import '../widgets/reel_icon_button.dart';
@@ -25,8 +26,8 @@ class _ReelsVideoState extends State<ReelsVideo> {
       child: BlocBuilder<VideoCubit, VideoState>(
         builder: (context, state) {
           return state.when(
-            initial: () => const Center(child: Text("initial")),
-            loading: () => const Center(child: CircularProgressIndicator()),
+            initial: () => const LoadingTiktokWidget(),
+            loading: () => const LoadingTiktokWidget(),
             loaded: (videoModel) {
               final videos = videoModel.hits;
 

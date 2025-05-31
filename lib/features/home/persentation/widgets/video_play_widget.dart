@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../../../core/widgets/loading_tiktok_widget.dart';
+
 class AutoPlayVideoPlayer extends StatefulWidget {
   final String url;
   final bool play;
@@ -54,6 +56,6 @@ class _AutoPlayVideoPlayerState extends State<AutoPlayVideoPlayer> {
               ),
             ),
           )
-        : const Center(child: CircularProgressIndicator());
+        : const LoadingTiktokWidget();
   }
 }

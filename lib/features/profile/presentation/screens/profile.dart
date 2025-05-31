@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tiktok_clone/core/themes/images.dart';
+import '../../../../core/themes/colors.dart';
+import '../../../../core/themes/font_weight_helper.dart';
+import '../../../../core/widgets/loading_tiktok_widget.dart';
 import '../../../auth/logic/cubit/auth_cubit/auth_cubit.dart';
 import '../../../auth/logic/cubit/auth_cubit/auth_state.dart';
 import '../widgets/profile_insights_details_row.dart';
@@ -34,7 +38,6 @@ class _ProfileScreenState extends State<ProfileScreen>
   Widget build(BuildContext context) {
     return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, state) {
-        print('BlocBuilder rebuilding with state: $state'); // Debug state changes
         return state.maybeWhen(
           authenticated: (user) {
             return Scaffold(
@@ -62,8 +65,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                 user.photoURL!.isNotEmpty
                             ? NetworkImage(
                                 '${user.photoURL!}?t=${DateTime.now().millisecondsSinceEpoch}')
-                            : const NetworkImage(
-                                'https://static.vecteezy.com/system/resources/thumbnails/036/280/650/small_2x/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-illustration-vector.jpg'),
+                            : const AssetImage(AppAssets.defaultProfile)
+                                as ImageProvider,
                       ),
                       const SizedBox(height: 10),
                       Text(
@@ -86,10 +89,14 @@ class _ProfileScreenState extends State<ProfileScreen>
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.pink,
-                          minimumSize: const Size(200, 40),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(0),
+                          ),
+                          backgroundColor: AppColors.buttonSecondaryColor,
                         ),
-                        child: const Text('Edit Profile'),
+                        child:  Text('Edit Profile' , style: AppFonts.bold.copyWith(
+                          color: AppColors.backgroundDarkBlue,
+                        )),
                       ),
                       const SizedBox(height: 20),
                       const Row(
@@ -125,7 +132,7 @@ class _ProfileScreenState extends State<ProfileScreen>
               ),
             );
           },
-          orElse: () => const Center(child: CircularProgressIndicator()),
+          orElse: () => const LoadingTiktokWidget(),
         );
       },
     );

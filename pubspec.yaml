@@ -52,6 +52,7 @@ dev_dependencies:
   freezed: ^2.4.4
   flutter_lints: ^4.0.0
   json_serializable: ^6.9.0
+  flutter_native_splash: ^2.4.1
   
 flutter_launcher_icons:
   android: "ic_launcher"
