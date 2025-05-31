@@ -10,7 +10,7 @@ class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
 
   @override
-  _WelcomeScreenState createState() => _WelcomeScreenState();
+  State<WelcomeScreen> createState() => _WelcomeScreenState();
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
@@ -67,7 +67,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 width: 200,
                 fit: BoxFit.cover,
               ),
-              TermsServicesWidgets(),
+              const TermsServicesWidgets(),
               CustomButtonWidget(
                 onPressed: () => _requestMediaPermissions(),
                 buttonText: 'Agree and continue',
