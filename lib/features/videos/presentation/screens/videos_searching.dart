@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/widgets/loading_tiktok_widget.dart';
 import '../../logic/search_video_state.dart';
 import '../../logic/video_searching_cubit.dart';
 import '../widgets/category_filter_list.dart';
@@ -114,7 +115,7 @@ class _SearchVideoScreenState extends State<SearchVideoScreen> {
                   return state.when(
                     initial: () =>
                         const Center(child: Text('Search for videos')),
-                    loading: () => _buildShimmerLoading(),
+                    loading: () => const LoadingTiktokWidget(),
                     loaded: (videos) => VideoGrid(videos: videos),
                     error: (message) => Center(child: Text(message)),
                   );
@@ -124,27 +125,6 @@ class _SearchVideoScreenState extends State<SearchVideoScreen> {
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildShimmerLoading() {
-    return GridView.builder(
-      padding: const EdgeInsets.all(8.0),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 8.0,
-        mainAxisSpacing: 8.0,
-        childAspectRatio: 1,
-      ),
-      itemCount: 6,
-      itemBuilder: (context, index) {
-        return Container(
-          decoration: BoxDecoration(
-            color: Colors.grey[300],
-            borderRadius: BorderRadius.circular(8.0),
-          ),
-        );
-      },
     );
   }
 }
