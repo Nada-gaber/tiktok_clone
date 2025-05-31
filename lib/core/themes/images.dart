@@ -14,6 +14,8 @@ class AppAssets {
 
   // Profile Icons
   static const String imageGallery = 'assets/icons/profile/image-gallery.svg';
+static const String defaultProfile = 'assets/icons/profile/default_profile.png';
+static const String loadingGif = 'assets/icons/profile/loading.gif';
 
 
 // logo 
