@@ -5,7 +5,10 @@ A TikTok-inspired video-sharing app
 
 
 
-https://github.com/user-attachments/assets/78d0732d-d60c-46fe-827f-a59e5e0ce234
+
+
+https://github.com/user-attachments/assets/474975e2-6242-44f7-892b-7d4cbc7a1f68
+
 
 
 ---
