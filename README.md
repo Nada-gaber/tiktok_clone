@@ -1,30 +1,5 @@
 # TikTok Clone
-
-A TikTok-inspired video-sharing app
-
-
-
-
-
-
-https://github.com/user-attachments/assets/474975e2-6242-44f7-892b-7d4cbc7a1f68
-
-
-
----
-
-## 📖 Overview
-
-A TikTok Clone built with **Flutter**, using the **Pixabay API** for video reels, **Firebase** for authentication and storage, **MVVM architecture**, and **Bloc/Cubit** for state management.
-
----
-
-## ✨ Features
-
-- 🎞️ **Reels**: Scroll through videos fetched from Pixabay API.  
-- 🔍 **Search**: Find videos by keywords.  
-- 🔐 **Authentication**: Login/register via Firebase Authentication.  
-- 👤 **Profile**: Edit name and profile image, stored in Firebase Storage.  
+![1](https://github.com/user-attachments/assets/eda859db-9421-4113-8079-29913601834f)
 
 ---
 
@@ -37,6 +12,12 @@ A TikTok Clone built with **Flutter**, using the **Pixabay API** for video reels
 - **Libraries**: Dio, CachedNetworkImage, FlutterVideoPlayer  
 
 ---
+## 👨‍💻  Features
+
+![2](https://github.com/user-attachments/assets/db952db8-5372-4047-9ed8-524dba2de268)
+![3](https://github.com/user-attachments/assets/f2f4f12a-dd03-4482-b94b-828f63d9c7d7)
+![4](https://github.com/user-attachments/assets/e9f3c6f7-db25-4890-b49e-ff1a2f5ed402)
+![5](https://github.com/user-attachments/assets/35fe43a2-294f-4af2-b87a-f06b85dba4d7)
 
 ## 🔑 Pixabay API Setup
 
@@ -55,8 +36,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 String apiKey = dotenv.env['PIXABAY_API_KEY']!;
 
 ```
-# Firebase Setup
 
+## 🏗️ Firebase Setup
 ## Authentication
 Email/password login via Firebase.
 
@@ -70,32 +51,6 @@ await storageRef.putFile(File(imagePath));
 
 ---
 
-## 🚀 Getting Started
-
-### Clone the Repo:
-```bash
-git clone https://github.com/Nada-gaber/tiktok_clone.git
-cd tiktok_clone
-```
-
-### Install Dependencies:
-```bash
-flutter pub get
-```
-
-### Add Environment Variables:
-Create a `.env` file with your Pixabay API key.
-
-### Set Up Firebase:
-- Add `google-services.json` (Android) or `GoogleService-Info.plist` (iOS).
-- Enable Authentication and Storage in Firebase Console.
-
-### Run the App:
-```bash
-flutter run
-```
----
-
-Built by **Nada Gaber**
+Built by **Nada Rizk**
 
 
