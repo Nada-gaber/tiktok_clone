@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone/core/themes/font_weight_helper.dart';
+import '../../../../core/themes/app_sizes.dart';
 import '../widgets/skip_next_button_onboarding.dart';
 import '../widgets/wrap_expanded_widget.dart';
 
@@ -11,7 +12,6 @@ class OnboardingScreens extends StatefulWidget {
 }
 
 class _OnboardingScreensState extends State<OnboardingScreens> {
-  // Track selected interests
   final List<bool> _selectedInterests = List.filled(10, false);
   final List<String> interests = const [
     'Comedy',
@@ -38,28 +38,30 @@ class _OnboardingScreensState extends State<OnboardingScreens> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(35.0),
+          padding: EdgeInsets.all(AppSizes.paddingLarge),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              const Text(
+              Text(
                 'Choose what you like',
-                style: AppFonts.head,
+                style: AppFonts.head(context),
                 textAlign: TextAlign.center,
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
-                child: Text(
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: AppSizes.paddingSmall),
+                child: const Text(
                   'Your feed will be personalized based on what you like.',
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.grey),
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: AppSizes.paddingLarge),
               InterestsWrapWidget(
                 interests: interests,
                 selectedInterests: _selectedInterests,
                 onInterestToggle: _toggleInterest,
               ),
+              const Spacer(),
               SkipNextButtonOnBoardingWidget(selectedCount: _selectedCount),
             ],
           ),

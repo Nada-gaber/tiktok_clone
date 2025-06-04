@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 
+import '../../../../core/themes/app_sizes.dart';
 import '../../../../core/themes/colors.dart';
 import '../../../../core/widgets/shared_button.dart';
 import '../screens/welcome_screen.dart';
@@ -32,15 +32,17 @@ class SkipNextButtonOnBoardingWidget extends StatelessWidget {
             minWidth: 160,
             buttonText: 'Skip'),
         CustomButtonWidget(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const WelcomeScreen(),
-                ),
-              );
-            },
-            minWidth: 160,
+            onPressed: _selectedCount > 0
+                ? () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const WelcomeScreen(),
+                      ),
+                    );
+                  }
+                : null,
+            minWidth: AppSizes.buttonWidthHalf(context),
             buttonText:
                 'Next ${_selectedCount > 0 ? "($_selectedCount)" : ""}'),
       ],
