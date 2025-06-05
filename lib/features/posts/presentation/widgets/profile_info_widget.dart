@@ -11,18 +11,18 @@ class ProfileDetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return  Row(
       children: [
-        CircleAvatar(
+       const  CircleAvatar(
           radius: 20,
           backgroundImage: AssetImage(AppAssets.profileIcon),
         ),
-        SizedBox(
+       const SizedBox(
           width: 10,
         ),
         Text(
           'User Name',
-          style: AppFonts.semiBold,
+          style: AppFonts.semiBold (context),
         ),
       ],
     );
