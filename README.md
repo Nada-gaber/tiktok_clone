@@ -8,16 +8,16 @@
 - **Framework**: Flutter  
 - **Architecture**: MVVM  
 - **State Management**: Bloc/Cubit  
-- **Backend**: Firebase Authentication, Firebase Storage, Pixabay API  
-- **Libraries**: Dio, CachedNetworkImage, FlutterVideoPlayer  
+- **Backend**: Firebase Authentication, Firebase Storage, Pixabay API, Hive local storage
+- **Libraries**: Dio, CachedNetworkImage, FlutterVideoPlayer, Hive 
 
 ---
 ## 👨‍💻  Features
 
-![2](https://github.com/user-attachments/assets/db952db8-5372-4047-9ed8-524dba2de268)
-![3](https://github.com/user-attachments/assets/f2f4f12a-dd03-4482-b94b-828f63d9c7d7)
-![4](https://github.com/user-attachments/assets/e9f3c6f7-db25-4890-b49e-ff1a2f5ed402)
-![5](https://github.com/user-attachments/assets/35fe43a2-294f-4af2-b87a-f06b85dba4d7)
+![1](https://github.com/user-attachments/assets/a2b55883-2734-4f9b-b666-bd45abe4c470)
+![2](https://github.com/user-attachments/assets/200526ff-534a-4cde-b378-244b00a04d22)
+![3](https://github.com/user-attachments/assets/9549be5e-eff4-4061-b8ab-45649ddaf211)
+![4](https://github.com/user-attachments/assets/f7005720-f4c6-4732-abd3-782b0d203c28)
 
 ## 🔑 Pixabay API Setup
 
@@ -38,7 +38,7 @@ String apiKey = dotenv.env['PIXABAY_API_KEY']!;
 ```
 
 ## 🏗️ Firebase Setup
-## Authentication
+#### Authentication
 Email/password login via Firebase.
 
 ## Storage
