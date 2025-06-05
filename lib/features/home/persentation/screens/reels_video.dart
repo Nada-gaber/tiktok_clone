@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tiktok_clone/core/themes/font_weight_helper.dart';
 import '../../../../core/di/dependency_injection.dart';
 import '../../../../core/themes/images.dart';
 import '../../../../core/widgets/loading_tiktok_widget.dart';
@@ -18,7 +19,8 @@ class ReelsVideo extends StatefulWidget {
 class _ReelsVideoState extends State<ReelsVideo> {
   final PageController _pageController = PageController();
   int currentIndex = 0;
-
+  bool _showAll = false;
+  final int _maxVisibleTags = 6;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -45,6 +47,16 @@ class _ReelsVideoState extends State<ReelsVideo> {
                     return const Center(child: Text("Video not available"));
                   }
 
+                  // Extract tags and handle display logic
+                  final List<String> tags = (video.tags != null &&
+                          video.tags!.isNotEmpty)
+                      ? video.tags!.split(',').map((tag) => tag.trim()).toList()
+                      : [];
+                  final bool hasMoreTags = tags.length > _maxVisibleTags;
+                  final List<String> displayedTags = _showAll || !hasMoreTags
+                      ? tags
+                      : tags.take(_maxVisibleTags).toList();
+
                   return Stack(
                     children: [
                       // Video Player Background
@@ -64,10 +76,11 @@ class _ReelsVideoState extends State<ReelsVideo> {
                           children: [
                             CircleAvatar(
                               radius: 30,
-                              backgroundImage: NetworkImage(
-                                video.userImageURL ??
-                                    "https://example.com/default.jpg",
-                              ),
+                              backgroundImage: (video.userImageURL != null &&
+                                      video.userImageURL?.isNotEmpty == true)
+                                  ? NetworkImage(video.userImageURL!)
+                                  : const AssetImage(AppAssets.defaultProfile)
+                                      as ImageProvider,
                             ),
                             const SizedBox(height: 23.0),
                             ReelIconButton(
@@ -103,18 +116,36 @@ class _ReelsVideoState extends State<ReelsVideo> {
                             Wrap(
                               spacing: 8.0,
                               runSpacing: 8.0,
-                              children: video.tags!
-                                  .split(',')
+                              children: displayedTags
                                   .map((tag) => Text(
-                                        '#${tag.trim()}',
+                                        '#$tag',
                                         style: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 14,
                                           fontWeight: FontWeight.w400,
                                         ),
+                                        maxLines:
+                                            1, // Ensure each tag stays on one line
                                       ))
                                   .toList(),
                             ),
+                            if (hasMoreTags)
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    _showAll = !_showAll;
+                                  });
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.only(top: 8.0),
+                                  child: Text(
+                                    _showAll ? 'Show less' : 'Show more',
+                                    style: AppFonts.semiBold(context).copyWith(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
                           ],
                         ),
                       ),

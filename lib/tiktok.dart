@@ -38,7 +38,7 @@ class _TiktokState extends State<Tiktok> {
           .then((prefs) => prefs.getBool('isFirstLaunch') ?? true),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return  const LoadingTiktokWidget();
+          return const LoadingTiktokWidget();
         }
 
         String initialRoute =
@@ -48,23 +48,16 @@ class _TiktokState extends State<Tiktok> {
           theme: ThemeData(
             brightness: Brightness.light,
             scaffoldBackgroundColor: AppColors.backgroundLightGray,
-        
             colorScheme: ColorScheme.fromSwatch(
               primarySwatch: Colors.grey,
               brightness: Brightness.light,
             ),
             elevatedButtonTheme: ElevatedButtonThemeData(
               style: ElevatedButton.styleFrom(
-                foregroundColor:
-                    Colors.white, // Text/icon color for light theme
+                foregroundColor: Colors.white,
               ),
             ),
           ),
-
-          // theme: ThemeData(
-          //
-          //
-          // ),
           debugShowCheckedModeBanner: false,
           initialRoute: initialRoute,
           onGenerateRoute: widget.appRouter.generateRoute,

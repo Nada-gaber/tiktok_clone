@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:tiktok_clone/core/themes/colors.dart';
-import 'package:tiktok_clone/core/themes/font_weight_helper.dart';
+import 'package:hive/hive.dart';
 import 'package:tiktok_clone/core/widgets/shared_button.dart';
 import '../../data/model/post_model.dart';
 import '../widgets/profile_info_widget.dart';
@@ -17,56 +16,110 @@ class CreatePostScreen extends StatefulWidget {
 class _CreatePostScreenState extends State<CreatePostScreen> {
   final TextEditingController _captionController = TextEditingController();
 
-  void _submitPost() {
+void _submitPost() async {
     final newPost = Post(
-      imageFile: widget.imageFile,
+      imagePath: widget.imageFile.path, // Store the file path
       caption: _captionController.text,
     );
+    final box = Hive.box<Post>('posts');
+    await box.add(newPost); // Save to Hive
     Navigator.pop(context, newPost);
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Create new post',
-          style: AppFonts.bold,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context),
         ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const ProfileDetailsWidget(),
-                CustomButtonWidget(
-                  onPressed: _submitPost,
-                  buttonText: 'Create',
-                  minWidth: 100,
-                ),
-              ],
+        title: const Text(
+          'New Post',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: CustomButtonWidget(
+              onPressed: _submitPost,
+              buttonText: 'Share',
+              minWidth: 80,
             ),
-            const SizedBox(height: 20),
-            Image.file(widget.imageFile, height: 200),
-            const SizedBox(height: 20),
-            TextField(
-              controller: _captionController,
-              decoration: const InputDecoration(
-                labelText: 'What\'s on your mind?',
-                labelStyle: AppFonts.caption,
-                fillColor: AppColors.inputFieldBackground,
-                filled: true,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
+          ),
+        ],
+        elevation: 0,
+        backgroundColor: Colors.white,
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Image Preview
+              Container(
+                width: double.infinity,
+                height: 300,
+                color: Colors.grey[200],
+                child: Image.file(
+                  widget.imageFile,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
                 ),
               ),
-              maxLines: 3,
-            ),
-            const SizedBox(height: 20),
-          ],
+              const SizedBox(height: 16),
+              // Profile and Caption
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ProfileDetailsWidget(),
+                    Spacer(),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: TextField(
+                  controller: _captionController,
+                  decoration: const InputDecoration(
+                    hintText: 'Write a caption...',
+                    hintStyle: TextStyle(color: Colors.grey),
+                    border: InputBorder.none,
+                  ),
+                  maxLines: 5,
+                  minLines: 1,
+                  style: const TextStyle(fontSize: 16),
+                ),
+              ),
+              const Divider(height: 1),
+              // Additional Options (e.g., Instagram-like features)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextButton.icon(
+                      onPressed: () {},
+                      icon: const Icon(Icons.location_on_outlined, size: 20),
+                      label: const Text('Add Location'),
+                      style: TextButton.styleFrom(foregroundColor: Colors.black),
+                    ),
+                    TextButton.icon(
+                      onPressed: () {},
+                      icon: const Icon(Icons.person_add_alt_1_outlined, size: 20),
+                      label: const Text('Tag People'),
+                      style: TextButton.styleFrom(foregroundColor: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
