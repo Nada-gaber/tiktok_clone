@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tiktok_clone/core/themes/images.dart';
 import 'package:tiktok_clone/core/widgets/shared_button.dart';
+import 'package:tiktok_clone/features/profile/presentation/screens/not_logged_in_profile.dart';
 import '../../../../core/themes/app_sizes.dart';
 import '../../../../core/themes/colors.dart';
 import '../../../../core/themes/font_weight_helper.dart';
@@ -41,6 +42,7 @@ class _ProfileScreenState extends State<ProfileScreen>
     return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, state) {
         return state.maybeWhen(
+          unauthenticated: () => const NotLoggedInProfile(),
           authenticated: (user) {
             return Scaffold(
               appBar: AppBar(
