@@ -14,9 +14,11 @@ class VideoCubit extends Cubit<VideoState> {
   try {
     final data = await repository.getVideos();
     log("Data: $data");  
+     if(isClosed) return; 
     emit(VideoState.loaded(data));
   } catch (e) {
     log("Error: $e");  
+    if(isClosed) return; 
     emit(VideoState.error(e.toString()));
   }
 }
