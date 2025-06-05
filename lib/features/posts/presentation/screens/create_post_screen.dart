@@ -29,9 +29,9 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title:  Text(
           'Create new post',
-          style: AppFonts.bold,
+          style: AppFonts.bold (context),
         ),
       ),
       body: Padding(
@@ -54,12 +54,12 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
             const SizedBox(height: 20),
             TextField(
               controller: _captionController,
-              decoration: const InputDecoration(
+              decoration:  InputDecoration(
                 labelText: 'What\'s on your mind?',
-                labelStyle: AppFonts.caption,
+                labelStyle: AppFonts.caption (context),
                 fillColor: AppColors.inputFieldBackground,
                 filled: true,
-                border: OutlineInputBorder(
+                border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                 ),
               ),
