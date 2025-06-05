@@ -17,8 +17,8 @@ class InterestsWrapWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Wrap(
-      spacing: AppSizes.paddingSmall,
-      runSpacing: AppSizes.paddingSmall,
+      spacing: AppSizes.paddingSmall(context),
+      runSpacing: AppSizes.paddingSmall(context),
       alignment: WrapAlignment.center,
       children: List.generate(interests.length, (index) {
         return SizedBox(
@@ -35,8 +35,8 @@ class InterestsWrapWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
               padding: EdgeInsets.symmetric(
-                horizontal: AppSizes.paddingMedium,
-                vertical: AppSizes.paddingSmall,
+                horizontal: AppSizes.paddingMedium(context),
+                vertical: AppSizes.paddingSmall(context),
               ),
             ),
             child: Text(
