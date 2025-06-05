@@ -3,7 +3,6 @@ import 'package:image_picker/image_picker.dart';
 import '../../../posts/data/model/post_model.dart';
 import 'handle_image_selection.dart';
 
-
 typedef OnPostCreated = void Function(Post post);
 
 Future<void> pickImageAndCreatePost({
@@ -12,7 +11,8 @@ Future<void> pickImageAndCreatePost({
 }) async {
   // Early return if context is not mounted
   if (!context.mounted) {
-    debugPrint('Error: Context is not mounted at the start of pickImageAndCreatePost');
+    debugPrint(
+        'Error: Context is not mounted at the start of pickImageAndCreatePost');
     return;
   }
 
@@ -34,10 +34,12 @@ Future<void> pickImageAndCreatePost({
                 onTap: () async {
                   Navigator.pop(bottomSheetContext); // Close the bottom sheet
                   if (context.mounted) {
-                    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+                    final XFile? image =
+                        await picker.pickImage(source: ImageSource.gallery);
                     await handleImageSelection(context, image, onPostCreated);
                   } else {
-                    debugPrint('Error: Context is not mounted after gallery selection');
+                    debugPrint(
+                        'Error: Context is not mounted after gallery selection');
                   }
                 },
               ),
@@ -47,10 +49,12 @@ Future<void> pickImageAndCreatePost({
                 onTap: () async {
                   Navigator.pop(bottomSheetContext); // Close the bottom sheet
                   if (context.mounted) {
-                    final XFile? image = await picker.pickImage(source: ImageSource.camera);
+                    final XFile? image =
+                        await picker.pickImage(source: ImageSource.camera);
                     await handleImageSelection(context, image, onPostCreated);
                   } else {
-                    debugPrint('Error: Context is not mounted after camera selection');
+                    debugPrint(
+                        'Error: Context is not mounted after camera selection');
                   }
                 },
               ),
