@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tiktok_clone/core/themes/colors.dart';
+import 'package:tiktok_clone/core/widgets/loading_tiktok_widget.dart';
 import 'package:tiktok_clone/features/home/persentation/helpers/post_helper.dart';
 import 'package:tiktok_clone/features/profile/presentation/screens/profile.dart';
 import '../../../../core/di/dependency_injection.dart';
+import '../../../../core/themes/app_sizes.dart';
+import '../../../../core/themes/font_weight_helper.dart';
 import '../../../../core/themes/images.dart';
 import '../../../auth/logic/cubit/auth_cubit/auth_cubit.dart';
 import '../../../auth/logic/cubit/auth_cubit/auth_state.dart';
@@ -15,6 +18,7 @@ import '../../../videos/logic/video_searching_cubit.dart';
 import '../../../videos/presentation/screens/videos_searching.dart';
 import 'reels_video.dart';
 import 'home_screen.dart';
+
 
 class NavScreen extends StatefulWidget {
   const NavScreen({super.key});
@@ -27,7 +31,6 @@ class _NavScreenState extends State<NavScreen> {
   int _selectedIndex = 0;
   final user = FirebaseAuth.instance.currentUser;
 
-  // List of screens for navigation
   late List<Widget> _screens;
 
   @override
@@ -44,11 +47,11 @@ class _NavScreenState extends State<NavScreen> {
       BlocBuilder<AuthCubit, AuthState>(
         builder: (context, state) {
           return state.maybeWhen(
-              authenticated: (user) =>
-                  user == null ? const ProfileScreen() : const ProfileScreen(),
-              orElse: () {
-                return const NotLoggedInProfile();
-              });
+            initial: () => const LoadingTiktokWidget(),
+            unauthenticated: () => const NotLoggedInProfile(),
+            authenticated: (user) => const ProfileScreen(),
+            orElse: () => const NotLoggedInProfile(),
+          );
         },
       ),
     ];
@@ -73,15 +76,21 @@ class _NavScreenState extends State<NavScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _screens[_selectedIndex],
-
-      // Custom Bottom Navigation Bar
       bottomNavigationBar: Stack(
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 30),
-            decoration: const BoxDecoration(
+            padding: EdgeInsets.symmetric(
+              horizontal: AppSizes.paddingSmall(context),
+              vertical: AppSizes.paddingMedium(context),
+            ),
+            decoration: BoxDecoration(
               color: AppColors.appBarBackground,
-              border: Border(top: BorderSide(color: Colors.black, width: 0.5)),
+              border: Border(
+                top: BorderSide(
+                  color: Colors.black,
+                  width: AppSizes.width(context, 0.5 / 375), // Proportional border width
+                ),
+              ),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -99,7 +108,6 @@ class _NavScreenState extends State<NavScreen> {
     );
   }
 
-  // Function for normal tab items
   Widget _navItem(int index, String assetPath, String indexTitle) {
     return GestureDetector(
       onTap: () => _onItemTapped(index),
@@ -107,14 +115,15 @@ class _NavScreenState extends State<NavScreen> {
         duration: const Duration(milliseconds: 200),
         curve: Curves.easeInOut,
         child: SizedBox(
-          width: 30,
-          height: 30,
+          width: AppSizes.width(context, 0.15), // ~15% of screen width
+          height: AppSizes.height(context, 0.06), // ~6% of screen height
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               SvgPicture.asset(
                 assetPath,
-                width: 18,
-                height: 18,
+                width: AppSizes.iconSizeSmall(context),
+                height: AppSizes.iconSizeSmall(context),
                 colorFilter: ColorFilter.mode(
                   _selectedIndex == index
                       ? AppColors.backgroundDarkBlue
@@ -122,18 +131,17 @@ class _NavScreenState extends State<NavScreen> {
                   BlendMode.srcIn,
                 ),
               ),
-              const SizedBox(height: 5),
+              SizedBox(height: AppSizes.paddingSmall(context)),
               Expanded(
                 child: Text(
                   indexTitle,
-                  style: TextStyle(
+                  style: AppFonts.caption(context).copyWith(
                     color: _selectedIndex == index
                         ? AppColors.backgroundDarkBlue
                         : AppColors.textSecondary,
-                    fontSize: 8,
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -141,7 +149,6 @@ class _NavScreenState extends State<NavScreen> {
     );
   }
 
-  // Special Floating Upload Button
   Widget _uploadButton() {
     return GestureDetector(
       onTap: () => pickImageAndCreatePost(
@@ -150,8 +157,8 @@ class _NavScreenState extends State<NavScreen> {
       ),
       child: SvgPicture.asset(
         AppAssets.addButton,
-        width: 30,
-        height: 30,
+        width: AppSizes.iconSizeMedium(context),
+        height: AppSizes.iconSizeMedium(context),
       ),
     );
   }
