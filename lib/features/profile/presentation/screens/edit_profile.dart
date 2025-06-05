@@ -2,7 +2,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tiktok_clone/core/widgets/shared_button.dart';
+import '../../../../core/themes/app_sizes.dart';
 import '../../../../core/themes/colors.dart';
+import '../../../../core/themes/font_weight_helper.dart';
 import '../../data/models/user_model.dart';
 import '../helper/update_profile.dart';
 import '../widgets/profile_image_widget.dart';
@@ -20,7 +22,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final _nameController = TextEditingController();
   File? _imageFile;
   bool _hasChanges = false;
-  final _profileService = ProfileService(); 
+  final _profileService = ProfileService();
 
   @override
   void initState() {
@@ -80,58 +82,73 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit Profile'),
+        title: Text('Edit Profile', style: AppFonts.title(context)),
         centerTitle: true,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(15.0),
+            padding: EdgeInsets.all(AppSizes.paddingMedium(context)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const SizedBox(height: 20),
+                SizedBox(height: AppSizes.paddingMedium(context)),
                 Stack(
                   alignment: Alignment.bottomRight,
                   children: [
-                    ProfileImageWidget(imageFile: _imageFile, widget: widget),
+                    ProfileImageWidget(
+                      imageFile: _imageFile,
+                      widget: widget,
+                    ),
                     Positioned(
                       bottom: 0,
                       right: 0,
                       child: GestureDetector(
                         onTap: _pickImage,
                         child: Container(
-                          padding: const EdgeInsets.all(4),
+                          padding:
+                              EdgeInsets.all(AppSizes.paddingSmall(context)),
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                             color: AppColors.buttonColor,
                           ),
-                          child: const Icon(
+                          child: Icon(
                             Icons.edit,
                             color: Colors.white,
-                            size: 20,
+                            size: AppSizes.iconSizeSmall(context),
                           ),
                         ),
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 10),
+                SizedBox(height: AppSizes.paddingSmall(context)),
                 TextField(
                   controller: _nameController,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(
+                    border: const OutlineInputBorder(),
                     labelText: 'Display Name',
                     hintText: 'Enter your name',
+                    labelStyle: AppFonts.regular(context).copyWith(
+                      color: AppColors.textSecondary,
+                    ),
+                    hintStyle: AppFonts.regular(context).copyWith(
+                      color: AppColors.textSecondary,
+                    ),
                   ),
+                  style:
+                      AppFonts.regular(context).copyWith(color: AppColors.backgroundDarkBlue),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: AppSizes.paddingSmall(context)),
                 CustomButtonWidget(
                   onPressed: _hasChanges ? _updateProfile : null,
                   buttonText: 'Save Changes',
-                  minWidth: double.infinity,
+                  minWidth: AppSizes.width(context, 1.0), // Full width
+                  buttonHeight: AppSizes.buttonHeight(context),
+                  disabledButtonColor: AppColors.buttonColor.withOpacity(0.5),
+                  disabledTextColor: Colors.white.withOpacity(0.7),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: AppSizes.paddingMedium(context)),
               ],
             ),
           ),
