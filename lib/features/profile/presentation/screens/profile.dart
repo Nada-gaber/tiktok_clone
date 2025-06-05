@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tiktok_clone/core/themes/images.dart';
+import 'package:tiktok_clone/core/widgets/shared_button.dart';
+import '../../../../core/themes/app_sizes.dart';
 import '../../../../core/themes/colors.dart';
 import '../../../../core/themes/font_weight_helper.dart';
 import '../../../../core/widgets/loading_tiktok_widget.dart';
 import '../../../auth/logic/cubit/auth_cubit/auth_cubit.dart';
 import '../../../auth/logic/cubit/auth_cubit/auth_state.dart';
-import '../widgets/profile_insights_details_row.dart';
+import '../widgets/profile_tab_bar.dart';
+import '../widgets/static_profile_details.dart';
 import '../widgets/tab_bar_views_profile.dart';
 import 'edit_profile.dart';
-
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -42,11 +44,14 @@ class _ProfileScreenState extends State<ProfileScreen>
           authenticated: (user) {
             return Scaffold(
               appBar: AppBar(
-                title: const Text('Profile'),
+                title: Text('Profile', style: AppFonts.title(context)),
                 centerTitle: true,
                 actions: [
                   IconButton(
-                    icon: const Icon(Icons.logout),
+                    icon: Icon(
+                      Icons.logout,
+                      size: AppSizes.iconSizeSmall(context),
+                    ),
                     onPressed: () {
                       context.read<AuthCubit>().signOut();
                     },
@@ -58,9 +63,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 20),
+                      SizedBox(height: AppSizes.paddingMedium(context)),
                       CircleAvatar(
-                        radius: 50,
+                        radius: AppSizes.avatarRadius(context),
                         backgroundImage: user.photoURL != null &&
                                 user.photoURL!.isNotEmpty
                             ? NetworkImage(
@@ -68,14 +73,13 @@ class _ProfileScreenState extends State<ProfileScreen>
                             : const AssetImage(AppAssets.defaultProfile)
                                 as ImageProvider,
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: AppSizes.paddingSmall(context)),
                       Text(
                         '@${user.displayName}',
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18),
+                        style: AppFonts.bold(context),
                       ),
-                      const SizedBox(height: 10),
-                      ElevatedButton(
+                      SizedBox(height: AppSizes.paddingSmall(context)),
+                      CustomButtonWidget(
                         onPressed: () async {
                           final updatedUser = await Navigator.push(
                             context,
@@ -88,44 +92,21 @@ class _ProfileScreenState extends State<ProfileScreen>
                             context.read<AuthCubit>().checkAuth();
                           }
                         },
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(0),
-                          ),
-                          backgroundColor: AppColors.buttonSecondaryColor,
-                        ),
-                        child:  Text('Edit Profile' , style: AppFonts.bold.copyWith(
-                          color: AppColors.backgroundDarkBlue,
-                        )),
+                        buttonText: 'Edit Profile',
+                        textColor: AppColors.backgroundDarkBlue,
+                        buttonColor: AppColors.buttonSecondaryColor,
+                        buttonHeight: AppSizes.buttonHeight(context) / 2,
+                        minWidth: AppSizes.buttonWidthHalf(context) / 1.5,
                       ),
-                      const SizedBox(height: 20),
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ProfileInsightsDetailsRow(
-                              digits: '100', title: 'following'),
-                          SizedBox(width: 30),
-                          ProfileInsightsDetailsRow(
-                              digits: '200', title: 'followers'),
-                          SizedBox(width: 30),
-                          ProfileInsightsDetailsRow(
-                              digits: '300', title: 'likes'),
-                        ],
-                      ),
-                      const SizedBox(height: 20),
-                      TabBar(
-                        controller: _tabController,
-                        tabs: const [
-                          Tab(icon: Icon(Icons.grid_on)),
-                          Tab(icon: Icon(Icons.lock_outline)),
-                          Tab(icon: Icon(Icons.bookmark_border)),
-                          Tab(icon: Icon(Icons.favorite_border)),
-                        ],
-                      ),
+                      SizedBox(height: AppSizes.paddingMedium(context)),
+                      const StaticProfileDetails(),
+                      SizedBox(height: AppSizes.paddingMedium(context)),
+                      ProfileTabBar(tabController: _tabController),
                       SizedBox(
-                          height: 400,
-                          child: TabBarViewProfileTabs(
-                              tabController: _tabController)),
+                        height: AppSizes.tabBarHeight(context),
+                        child: TabBarViewProfileTabs(
+                            tabController: _tabController),
+                      ),
                     ],
                   ),
                 ),

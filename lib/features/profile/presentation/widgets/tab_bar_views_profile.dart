@@ -51,10 +51,10 @@ class _TabBarViewProfileTabsState extends State<TabBarViewProfileTabs> {
                                 color: AppColors.textSecondary,
                               ),
                               const SizedBox(height: 10),
-                              const Text(
+                              Text(
                                 'What are some good photos you\'ve taken recently?',
                                 textAlign: TextAlign.center,
-                                style: AppFonts.bold,
+                                style: AppFonts.bold(context),
                               ),
                               const SizedBox(height: 20),
                               CustomUploadButton(

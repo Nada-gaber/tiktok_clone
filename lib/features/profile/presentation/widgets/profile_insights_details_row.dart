@@ -20,7 +20,7 @@ class ProfileInsightsDetailsRow extends StatelessWidget {
       children: [
         Text(
           digits,
-          style: AppFonts.bold,
+          style: AppFonts.bold(context),
         ),
         Text(title),
       ],
