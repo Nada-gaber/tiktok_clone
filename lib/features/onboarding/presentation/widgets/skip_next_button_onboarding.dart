@@ -42,7 +42,7 @@ class SkipNextButtonOnBoardingWidget extends StatelessWidget {
                     );
                   }
                 : null,
-            minWidth: AppSizes.buttonWidthHalf(context),
+            minWidth: AppSizes.buttonWidthFourth(context),
             buttonText:
                 'Next ${_selectedCount > 0 ? "($_selectedCount)" : ""}'),
       ],

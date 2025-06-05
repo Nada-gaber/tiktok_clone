@@ -28,8 +28,8 @@ class ReelIconButton extends StatelessWidget {
           icon: SvgPicture.asset(
             assetName ?? AppAssets.heartIcon,
             colorFilter:  ColorFilter.mode(color ?? Colors.white, BlendMode.srcIn),
-            width: 45,
-            height: 45,
+            width: 35,
+            height: 35,
           ),
         ),
         Text(
