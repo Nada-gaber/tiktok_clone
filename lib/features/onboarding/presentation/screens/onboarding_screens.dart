@@ -38,7 +38,7 @@ class _OnboardingScreensState extends State<OnboardingScreens> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(AppSizes.paddingLarge),
+          padding: EdgeInsets.all(AppSizes.paddingLarge(context)),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -48,14 +48,14 @@ class _OnboardingScreensState extends State<OnboardingScreens> {
                 textAlign: TextAlign.center,
               ),
               Padding(
-                padding: EdgeInsets.symmetric(vertical: AppSizes.paddingSmall),
+                padding: EdgeInsets.symmetric(vertical: AppSizes.paddingSmall(context)),
                 child: const Text(
                   'Your feed will be personalized based on what you like.',
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.grey),
                 ),
               ),
-              SizedBox(height: AppSizes.paddingLarge),
+              SizedBox(height: AppSizes.paddingLarge(context)),
               InterestsWrapWidget(
                 interests: interests,
                 selectedInterests: _selectedInterests,
