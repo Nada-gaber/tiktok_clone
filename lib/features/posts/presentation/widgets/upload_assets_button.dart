@@ -31,7 +31,7 @@ class _CustomUploadButtonState extends State<CustomUploadButton> {
             },
       buttonText: 'Create Post',
       minWidth: AppSizes.buttonWidthHalf(context),
-      buttonHeight: AppSizes.buttonHeight(context),
+      buttonHeight: AppSizes.buttonHeight(context)/2,
     );
   }
 }
