@@ -7,6 +7,7 @@ import '../../../../core/widgets/loading_tiktok_widget.dart';
 import '../../logic/cubit/video/video_state.dart';
 import '../../logic/cubit/video/videos_cubit.dart';
 import '../widgets/reel_icon_button.dart';
+import '../widgets/reels_circle_avatar.dart';
 import '../widgets/video_play_widget.dart';
 
 class ReelsVideo extends StatefulWidget {
@@ -74,14 +75,7 @@ class _ReelsVideoState extends State<ReelsVideo> {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            CircleAvatar(
-                              radius: 30,
-                              backgroundImage: (video.userImageURL != null &&
-                                      video.userImageURL?.isNotEmpty == true)
-                                  ? NetworkImage(video.userImageURL!)
-                                  : const AssetImage(AppAssets.defaultProfile)
-                                      as ImageProvider,
-                            ),
+                            ReelCircleAvatar(video: video),
                             const SizedBox(height: 23.0),
                             ReelIconButton(
                                 iconString: video.likes.toString(),
