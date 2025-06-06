@@ -9,7 +9,7 @@ class AppColors {
   static const textSecondary =
       Color(0xFF666666); // Lighter gray text for secondary content
        static const buttonSecondaryColor =
-      Color.fromARGB(255, 235, 235, 235); // Lighter gray button for secondary content
+      Color(0xFFEBEBEB); // Lighter gray button for secondary content
   static const iconColor = Color(0xFF000000); // Icons in black for visibility
   static const buttonColor = Color(0xFFFE2C55); // Button color (TikTok Red)
   static const buttonTextColor = Color(0xFFFFFFFF); // White text on buttons

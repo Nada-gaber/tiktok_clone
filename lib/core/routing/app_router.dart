@@ -4,7 +4,7 @@ import 'package:tiktok_clone/core/routing/routes.dart';
 import 'package:tiktok_clone/features/onboarding/presentation/screens/onboarding_screens.dart';
 import '../../features/auth/logic/cubit/auth_cubit/auth_cubit.dart';
 import '../../features/auth/presentation/screens/register_screen.dart';
-import '../../features/home/persentation/screens/home_screen.dart';
+import '../../features/home/persentation/screens/inbox_screen.dart';
 import '../../features/home/persentation/screens/nav_screen.dart';
 
 class AppRouter {
@@ -12,7 +12,7 @@ class AppRouter {
     switch (settings.name) {
       case Routes.home:
         return MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
+          builder: (context) => const InboxScreen(),
         );
 
       case Routes.navBar:

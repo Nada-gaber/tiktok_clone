@@ -19,10 +19,10 @@ void main() async {
   await Hive.openBox<Post>('posts');
   setupGetIt();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    systemNavigationBarColor: Colors.white,
-    systemNavigationBarIconBrightness: Brightness.light,
-    statusBarBrightness: Brightness.light,
-    statusBarIconBrightness: Brightness.light,
+    systemNavigationBarColor: Colors.black,
+    systemNavigationBarIconBrightness: Brightness.dark,
+    statusBarBrightness: Brightness.dark,
+    statusBarIconBrightness: Brightness.dark,
     statusBarColor: Colors.transparent,
   ));
 

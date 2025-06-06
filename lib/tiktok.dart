@@ -46,15 +46,15 @@ class _TiktokState extends State<Tiktok> {
 
         return MaterialApp(
           theme: ThemeData(
-            brightness: Brightness.light,
-            scaffoldBackgroundColor: AppColors.backgroundLightGray,
+            brightness: Brightness.dark,
+            scaffoldBackgroundColor: AppColors.backgroundDarkBlue,
             colorScheme: ColorScheme.fromSwatch(
               primarySwatch: Colors.grey,
-              brightness: Brightness.light,
+              brightness: Brightness.dark,
             ),
             elevatedButtonTheme: ElevatedButtonThemeData(
               style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white,
+                foregroundColor: Colors.black,
               ),
             ),
           ),
