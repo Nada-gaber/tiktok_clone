@@ -33,7 +33,7 @@ class VideoTypeTabBar extends StatelessWidget {
                     videoTypes[index],
                     style: TextStyle(
                       fontWeight: selectedIndex == index ? FontWeight.bold : FontWeight.normal,
-                      color: selectedIndex == index ? Colors.black : Colors.grey,
+                      color: selectedIndex == index ? Colors.white : Colors.grey,
                     ),
                   ),
                   if (selectedIndex == index)
@@ -41,7 +41,7 @@ class VideoTypeTabBar extends StatelessWidget {
                       margin: const EdgeInsets.only(top: 4.0),
                       height: 2,
                       width: 20,
-                      color: Colors.black,
+                      color: Colors.white,
                     ),
                 ],
               ),

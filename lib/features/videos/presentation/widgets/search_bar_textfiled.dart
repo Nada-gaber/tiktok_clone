@@ -26,11 +26,11 @@ class SearchBarWidget extends StatelessWidget {
               ? 'Search in $selectedCategory'
               : 'Search videos...',
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30.0),
+            borderRadius: BorderRadius.circular(10.0),
             borderSide: BorderSide.none,
           ),
           filled: true,
-          fillColor: Colors.grey[200],
+         // fillColor: Colors.grey[200],
           prefixIcon: const Icon(Icons.search),
           suffixIcon: IconButton(
             icon: const Icon(Icons.filter_list),
