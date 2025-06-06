@@ -17,7 +17,7 @@ import '../../../profile/presentation/screens/not_logged_in_profile.dart';
 import '../../../videos/logic/video_searching_cubit.dart';
 import '../../../videos/presentation/screens/videos_searching.dart';
 import 'reels_video.dart';
-import 'home_screen.dart';
+import 'inbox_screen.dart';
 
 
 class NavScreen extends StatefulWidget {
@@ -42,8 +42,8 @@ class _NavScreenState extends State<NavScreen> {
         create: (context) => getIt<SearchVideoCubit>()..searchVideos(),
         child: const SearchVideoScreen(),
       ),
-      const HomeScreen(),
-      user == null ? const NotLoggedInProfile() : const HomeScreen(),
+      const InboxScreen(),
+      user == null ? const NotLoggedInProfile() : const InboxScreen(),
       BlocBuilder<AuthCubit, AuthState>(
         builder: (context, state) {
           return state.maybeWhen(
@@ -84,7 +84,7 @@ class _NavScreenState extends State<NavScreen> {
               vertical: AppSizes.paddingMedium(context),
             ),
             decoration: BoxDecoration(
-              color: AppColors.appBarBackground,
+              color: AppColors.backgroundDarkBlue,
               border: Border(
                 top: BorderSide(
                   color: Colors.black,
@@ -126,8 +126,8 @@ class _NavScreenState extends State<NavScreen> {
                 height: AppSizes.iconSizeSmall(context),
                 colorFilter: ColorFilter.mode(
                   _selectedIndex == index
-                      ? AppColors.backgroundDarkBlue
-                      : AppColors.textSecondary,
+                      ? AppColors.backgroundLightGray
+                      : AppColors.buttonSecondaryColor,
                   BlendMode.srcIn,
                 ),
               ),
@@ -137,8 +137,8 @@ class _NavScreenState extends State<NavScreen> {
                   indexTitle,
                   style: AppFonts.caption(context).copyWith(
                     color: _selectedIndex == index
-                        ? AppColors.backgroundDarkBlue
-                        : AppColors.textSecondary,
+                        ? AppColors.backgroundLightGray
+                        : AppColors.buttonSecondaryColor,
                   ),
                 ),
               ),
