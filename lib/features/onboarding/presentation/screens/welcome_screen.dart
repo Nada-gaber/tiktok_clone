@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:tiktok_clone/core/routing/routes.dart';
+import 'package:tiktok_clone/core/themes/colors.dart';
 import 'package:tiktok_clone/core/themes/images.dart';
 import 'package:tiktok_clone/core/widgets/shared_button.dart';
 
@@ -44,14 +45,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.backgroundLightGray,
       body: SafeArea(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
+               const Text(
                 'Welcome to TikTok',
-                style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold , color: AppColors.backgroundDarkBlue),
               ),
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 10),

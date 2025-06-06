@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tiktok_clone/core/themes/colors.dart';
 import 'package:tiktok_clone/core/themes/font_weight_helper.dart';
 import '../../../../core/themes/app_sizes.dart';
 import '../widgets/skip_next_button_onboarding.dart';
@@ -36,6 +37,7 @@ class _OnboardingScreensState extends State<OnboardingScreens> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.backgroundLightGray,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(AppSizes.paddingLarge(context)),
@@ -44,8 +46,9 @@ class _OnboardingScreensState extends State<OnboardingScreens> {
             children: [
               Text(
                 'Choose what you like',
-                style: AppFonts.head(context),
+                style: AppFonts.head(context).copyWith(color: AppColors.backgroundDarkBlue, ),
                 textAlign: TextAlign.center,
+                
               ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: AppSizes.paddingSmall(context)),
