@@ -86,35 +86,40 @@ class LogoutIconButton extends StatelessWidget {
                           ),
                         ),
                         // Logout button with TikTok's vibrant accent
-                        TextButton(
-                          onPressed: () =>
-                              Navigator.of(dialogContext).pop(true),
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 10,
-                              horizontal: 20,
-                            ),
-                            decoration: BoxDecoration(
-                              gradient: const LinearGradient(
-                                colors: [
-                                  AppColors.buttonColor,
-                                  Colors.cyanAccent,
-                                ],
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                              ),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: const Text(
-                              'Log Out',
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                        ),
+      TextButton(
+        onPressed: () =>
+            Navigator.of(dialogContext).pop(true),
+        child: Builder(
+          builder: (context) {
+            final colorScheme = Theme.of(context).colorScheme;
+            return Container(
+              padding: const EdgeInsets.symmetric(
+                vertical: 10,
+                horizontal: 20,
+              ),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    colorScheme.onPrimary, // Theme-aware start color
+                    colorScheme.onSecondary, // Theme-aware end color
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: const Text(
+                'Log Out',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            );
+          },
+        ),
+      ),
                       ],
                     ),
                   ],

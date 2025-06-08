@@ -54,7 +54,10 @@ class _TabBarViewProfileTabsState extends State<TabBarViewProfileTabs> {
                                   SvgPicture.asset(
                                     AppAssets.imageGallery,
                                     width: 60,
-                                    color: AppColors.textSecondary,
+                                    colorFilter: ColorFilter.mode(
+                                      AppColors.getTextSecondary(context),
+                                      BlendMode.srcIn,
+                                    ),
                                   ),
                                   const SizedBox(height: 10),
                                   Text(
