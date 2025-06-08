@@ -1,35 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:tiktok_clone/core/routing/app_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tiktok_clone/tiktok.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'features/posts/data/model/post_model.dart';
 import 'firebase_options.dart';
 import 'core/di/dependency_injection.dart';
 
+Future<bool> _checkFirstLaunch() async {
+  try {
+    final prefs = await SharedPreferences.getInstance();
+    final isFirstLaunch = prefs.getBool('isFirstLaunch') ?? true;
+    print('isFirstLaunch: $isFirstLaunch'); // Debug log
+    if (isFirstLaunch) {
+      await prefs.setBool('isFirstLaunch', false);
+      print('Set isFirstLaunch to false'); // Debug log
+    }
+    return isFirstLaunch;
+  } catch (e) {
+    print('Error accessing SharedPreferences: $e');
+    return true; // Default to onboarding on error
+  }
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  WidgetsFlutterBinding.ensureInitialized();
-
   await dotenv.load(fileName: ".tiktok.env");
   await Hive.initFlutter();
   Hive.registerAdapter(PostAdapter());
   await Hive.openBox<Post>('posts');
   setupGetIt();
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    systemNavigationBarColor: Colors.black,
-    systemNavigationBarIconBrightness: Brightness.dark,
-    statusBarBrightness: Brightness.dark,
-    statusBarIconBrightness: Brightness.dark,
-    statusBarColor: Colors.transparent,
-  ));
-
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(Tiktok(
-    appRouter: AppRouter(),
-  ));
+  final isFirstLaunch = await _checkFirstLaunch(); // Perform check once
+  print(
+      'Initial Route: ${isFirstLaunch ? '/onboarding' : '/navbar'}'); // Debug log
+  runApp(Tiktok(isFirstLaunch: isFirstLaunch));
 }
