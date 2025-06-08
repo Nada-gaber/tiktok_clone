@@ -44,6 +44,7 @@ void _submitPost() async {
               onPressed: _submitPost,
               buttonText: 'Share',
               minWidth: 80,
+              
             ),
           ),
         ],
