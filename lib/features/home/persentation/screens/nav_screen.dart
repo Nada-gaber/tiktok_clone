@@ -19,7 +19,6 @@ import '../../../videos/presentation/screens/videos_searching.dart';
 import 'reels_video.dart';
 import 'inbox_screen.dart';
 
-
 class NavScreen extends StatefulWidget {
   const NavScreen({super.key});
 
@@ -76,34 +75,30 @@ class _NavScreenState extends State<NavScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _screens[_selectedIndex],
-      bottomNavigationBar: Stack(
-        children: [
-          Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: AppSizes.paddingSmall(context),
-              vertical: AppSizes.paddingMedium(context),
-            ),
-            decoration: BoxDecoration(
-              color: AppColors.backgroundDarkBlue,
-              border: Border(
-                top: BorderSide(
-                  color: Colors.black,
-                  width: AppSizes.width(context, 0.5 / 375), // Proportional border width
-                ),
-              ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _navItem(0, AppAssets.homeIcon, 'Home'),
-                _navItem(1, AppAssets.searchIcon, 'Discover'),
-                _uploadButton(),
-                _navItem(3, AppAssets.inboxIcon, 'Inbox'),
-                _navItem(4, AppAssets.profileIcon, 'Profile'),
-              ],
+      bottomNavigationBar: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: AppSizes.paddingSmall(context),
+          vertical: AppSizes.paddingMedium(context),
+        ),
+        decoration: BoxDecoration(
+          color: AppColors.getModalBackgroundColor(context),
+          border: Border(
+            top: BorderSide(
+              color: AppColors.getNavBarBorderColor(context),
+              width: AppSizes.width(context, 0.5 / 375),
             ),
           ),
-        ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            _navItem(0, AppAssets.homeIcon, 'Home'),
+            _navItem(1, AppAssets.searchIcon, 'Discover'),
+            _uploadButton(),
+            _navItem(3, AppAssets.inboxIcon, 'Inbox'),
+            _navItem(4, AppAssets.profileIcon, 'Profile'),
+          ],
+        ),
       ),
     );
   }
@@ -115,8 +110,8 @@ class _NavScreenState extends State<NavScreen> {
         duration: const Duration(milliseconds: 200),
         curve: Curves.easeInOut,
         child: SizedBox(
-          width: AppSizes.width(context, 0.15), // ~15% of screen width
-          height: AppSizes.height(context, 0.06), // ~6% of screen height
+          width: AppSizes.width(context, 0.15),
+          height: AppSizes.height(context, 0.06),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -126,8 +121,8 @@ class _NavScreenState extends State<NavScreen> {
                 height: AppSizes.iconSizeSmall(context),
                 colorFilter: ColorFilter.mode(
                   _selectedIndex == index
-                      ? AppColors.backgroundLightGray
-                      : AppColors.buttonSecondaryColor,
+                      ? AppColors.getNavItemSelectedColor(context)
+                      : AppColors.getNavItemUnselectedColor(context),
                   BlendMode.srcIn,
                 ),
               ),
@@ -135,11 +130,11 @@ class _NavScreenState extends State<NavScreen> {
               Expanded(
                 child: Text(
                   indexTitle,
-                  style: AppFonts.caption(context).copyWith(
-                    color: _selectedIndex == index
-                        ? AppColors.backgroundLightGray
-                        : AppColors.buttonSecondaryColor,
-                  ),
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        color: _selectedIndex == index
+                            ? AppColors.getNavItemSelectedColor(context)
+                            : AppColors.getNavItemUnselectedColor(context),
+                      ),
                 ),
               ),
             ],
