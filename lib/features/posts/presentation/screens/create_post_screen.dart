@@ -16,7 +16,7 @@ class CreatePostScreen extends StatefulWidget {
 class _CreatePostScreenState extends State<CreatePostScreen> {
   final TextEditingController _captionController = TextEditingController();
 
-void _submitPost() async {
+  void _submitPost() async {
     final newPost = Post(
       imagePath: widget.imageFile.path, // Store the file path
       caption: _captionController.text,
@@ -25,6 +25,7 @@ void _submitPost() async {
     await box.add(newPost); // Save to Hive
     Navigator.pop(context, newPost);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,12 +45,10 @@ void _submitPost() async {
               onPressed: _submitPost,
               buttonText: 'Share',
               minWidth: 80,
-              
             ),
           ),
         ],
         elevation: 0,
-        backgroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -60,10 +59,9 @@ void _submitPost() async {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Image Preview
-              Container(
+              SizedBox(
                 width: double.infinity,
                 height: 300,
-                color: Colors.grey[200],
                 child: Image.file(
                   widget.imageFile,
                   fit: BoxFit.cover,
@@ -89,34 +87,11 @@ void _submitPost() async {
                   controller: _captionController,
                   decoration: const InputDecoration(
                     hintText: 'Write a caption...',
-                    hintStyle: TextStyle(color: Colors.grey),
                     border: InputBorder.none,
                   ),
                   maxLines: 5,
                   minLines: 1,
                   style: const TextStyle(fontSize: 16),
-                ),
-              ),
-              const Divider(height: 1),
-              // Additional Options (e.g., Instagram-like features)
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TextButton.icon(
-                      onPressed: () {},
-                      icon: const Icon(Icons.location_on_outlined, size: 20),
-                      label: const Text('Add Location'),
-                      style: TextButton.styleFrom(foregroundColor: Colors.black),
-                    ),
-                    TextButton.icon(
-                      onPressed: () {},
-                      icon: const Icon(Icons.person_add_alt_1_outlined, size: 20),
-                      label: const Text('Tag People'),
-                      style: TextButton.styleFrom(foregroundColor: Colors.black),
-                    ),
-                  ],
                 ),
               ),
             ],
