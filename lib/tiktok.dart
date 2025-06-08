@@ -1,68 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tiktok_clone/core/routing/app_router.dart';
-import 'package:tiktok_clone/core/themes/colors.dart';
 import 'core/routing/routes.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'core/themes/app_theme.dart';
+import 'core/themes/theme_cubit.dart';
 
-import 'core/widgets/loading_tiktok_widget.dart';
+class Tiktok extends StatelessWidget {
+  final bool isFirstLaunch;
 
-class Tiktok extends StatefulWidget {
-  final AppRouter appRouter;
-
-  const Tiktok({super.key, required this.appRouter});
-
-  @override
-  State<Tiktok> createState() => _TiktokState();
-}
-
-class _TiktokState extends State<Tiktok> {
-  @override
-  void initState() {
-    super.initState();
-    _checkFirstLaunch();
-  }
-
-  Future<void> _checkFirstLaunch() async {
-    final prefs = await SharedPreferences.getInstance();
-    bool isFirstLaunch = prefs.getBool('isFirstLaunch') ?? true;
-
-    if (isFirstLaunch) {
-      await prefs.setBool('isFirstLaunch', false);
-    }
-  }
+  const Tiktok({super.key, required this.isFirstLaunch});
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<bool>(
-      future: SharedPreferences.getInstance()
-          .then((prefs) => prefs.getBool('isFirstLaunch') ?? true),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const LoadingTiktokWidget();
-        }
+    return BlocProvider(
+      create: (context) => ThemeCubit(),
+      child: BlocBuilder<ThemeCubit, ThemeMode>(
+        builder: (context, themeMode) {
+          final initialRoute = isFirstLaunch ? Routes.onBoarding : Routes.navBar;
+          print('Tiktok Widget: Initial Route = $initialRoute'); // Debug log
 
-        String initialRoute =
-            snapshot.data! ? Routes.onBoarding : Routes.navBar;
-
-        return MaterialApp(
-          theme: ThemeData(
-            brightness: Brightness.dark,
-            scaffoldBackgroundColor: AppColors.backgroundDarkBlue,
-            colorScheme: ColorScheme.fromSwatch(
-              primarySwatch: Colors.grey,
-              brightness: Brightness.dark,
-            ),
-            elevatedButtonTheme: ElevatedButtonThemeData(
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.black,
-              ),
-            ),
-          ),
-          debugShowCheckedModeBanner: false,
-          initialRoute: initialRoute,
-          onGenerateRoute: widget.appRouter.generateRoute,
-        );
-      },
+          return MaterialApp(
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: themeMode,
+            debugShowCheckedModeBanner: false,
+            initialRoute: initialRoute,
+            onGenerateRoute: AppRouter().generateRoute,
+          );
+        },
+      ),
     );
   }
 }
