@@ -34,7 +34,9 @@ class ReelIconButton extends StatelessWidget {
         ),
         Text(
           iconString ?? "0",
-          style: AppFonts.regular (context),
+          style: AppFonts.regular(context).copyWith(
+            color: Colors.white,
+          ),
         ),
         const SizedBox(height: 20.0),
       ],

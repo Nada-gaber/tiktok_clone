@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:tiktok_clone/core/themes/colors.dart';
 
 class VideoTypeTabBar extends StatelessWidget {
   final List<String> videoTypes;
@@ -33,7 +34,6 @@ class VideoTypeTabBar extends StatelessWidget {
                     videoTypes[index],
                     style: TextStyle(
                       fontWeight: selectedIndex == index ? FontWeight.bold : FontWeight.normal,
-                      color: selectedIndex == index ? Colors.white : Colors.grey,
                     ),
                   ),
                   if (selectedIndex == index)
@@ -41,7 +41,7 @@ class VideoTypeTabBar extends StatelessWidget {
                       margin: const EdgeInsets.only(top: 4.0),
                       height: 2,
                       width: 20,
-                      color: Colors.white,
+                      color: AppColors.getTextPrimary(context),
                     ),
                 ],
               ),
