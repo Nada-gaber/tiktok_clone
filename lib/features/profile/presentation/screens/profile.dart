@@ -7,6 +7,7 @@ import 'package:tiktok_clone/features/profile/presentation/screens/not_logged_in
 import '../../../../core/themes/app_sizes.dart';
 import '../../../../core/themes/colors.dart';
 import '../../../../core/themes/font_weight_helper.dart';
+import '../../../../core/themes/theme_toggle_button.dart';
 import '../../../../core/widgets/loading_tiktok_widget.dart';
 import '../../../auth/logic/cubit/auth_cubit/auth_cubit.dart';
 import '../../../auth/logic/cubit/auth_cubit/auth_state.dart';
@@ -48,7 +49,6 @@ class _ProfileScreenState extends State<ProfileScreen>
           authenticated: (user) {
             return Scaffold(
               appBar: AppBar(
-                backgroundColor: AppColors.backgroundDarkBlue,
                 title: Text('Profile', style: AppFonts.title(context)),
                 centerTitle: true,
                 actions: const [
@@ -78,24 +78,34 @@ class _ProfileScreenState extends State<ProfileScreen>
                       SizedBox(height: AppSizes.paddingMedium(context)),
                       const StaticProfileDetails(),
                       SizedBox(height: AppSizes.paddingLarge(context)),
-                      CustomButtonWidget(
-                        onPressed: () async {
-                          final updatedUser = await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  EditProfileScreen(user: user),
-                            ),
-                          );
-                          if (updatedUser != null && context.mounted) {
-                            context.read<AuthCubit>().checkAuth();
-                          }
-                        },
-                        buttonText: 'Edit Profile',
-                        textColor: AppColors.backgroundDarkBlue,
-                        buttonColor: AppColors.buttonSecondaryColor,
-                        buttonHeight: AppSizes.buttonHeight(context) / 2,
-                        minWidth: AppSizes.buttonWidthHalf(context) / 1.5,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          SizedBox(
+                            width: AppSizes.width(context, 0.2),
+                          ),
+                          CustomButtonWidget(
+                            onPressed: () async {
+                              final updatedUser = await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      EditProfileScreen(user: user),
+                                ),
+                              );
+                              if (updatedUser != null && context.mounted) {
+                                context.read<AuthCubit>().checkAuth();
+                              }
+                            },
+                            buttonText: 'Edit Profile',
+                            buttonHeight: AppSizes.buttonHeight(context) / 1.5,
+                            minWidth: AppSizes.buttonWidthHalf(context) / 1.5,
+                          ),
+                          const ThemeToggleButton(),
+                          SizedBox(
+                            width: AppSizes.width(context, 0.2),
+                          ),
+                        ],
                       ),
                       SizedBox(height: AppSizes.paddingMedium(context)),
                       SizedBox(height: AppSizes.paddingMedium(context)),
