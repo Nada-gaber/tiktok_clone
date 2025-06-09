@@ -21,14 +21,7 @@ class ThemeToggleButton extends StatelessWidget {
             padding: EdgeInsets.all(AppSizes.paddingSmall(context)),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              gradient: LinearGradient(
-                colors: [
-                  AppColors.getButtonBackgroundColor(context),
-                  AppColors.getButtonSecondaryBackgroundColor(context),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
+              color: AppColors.getButtonBackgroundColor(context),
               boxShadow: [
                 BoxShadow(
                   color: AppColors.getShadowColor(context),
@@ -40,7 +33,7 @@ class ThemeToggleButton extends StatelessWidget {
             child: Image.asset(
               isDarkMode
                   ? AppAssets.lightThemeIcon
-                  : AppAssets.darkThemeIcon, // Define these in AppAssets
+                  : AppAssets.darkThemeIcon, 
               width: AppSizes.iconSizeSmall(context),
               height: AppSizes.iconSizeSmall(context),
               color: AppColors.getButtonTextColor(context),
