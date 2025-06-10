@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tiktok_clone/core/widgets/shared_button.dart';
-import '../../../../core/themes/colors.dart';
 import 'login_screen.dart';
 
 class RegisterSheet extends StatefulWidget {
@@ -117,7 +116,7 @@ class _RegisterSheetState extends State<RegisterSheet> {
               onPressed: () {
                 Navigator.pop(context);
                 showModalBottomSheet(
-                  backgroundColor: const Color(0xFF242424),
+              //    backgroundColor: const Color(0xFF242424),
                   context: context,
                   isScrollControlled: true,
                   shape: const RoundedRectangleBorder(

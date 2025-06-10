@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/themes/app_sizes.dart';
 import '../../../../core/themes/colors.dart';
+import '../../../../core/themes/font_weight_helper.dart';
 
 class InterestsWrapWidget extends StatelessWidget {
   final List<String> interests;
@@ -28,7 +29,7 @@ class InterestsWrapWidget extends StatelessWidget {
                   backgroundColor: WidgetStateProperty.all(
                     selectedInterests[index]
                         ? AppColors.getButtonBackgroundColor(context)
-                        : AppColors.getButtonSecondaryBackgroundColor(context),
+                        : AppColors.getModalBackgroundColor(context),
                   ),
                   foregroundColor: WidgetStateProperty.all(
                     selectedInterests[index]
@@ -46,16 +47,13 @@ class InterestsWrapWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-            child: Text(
-              '${interests[index]} +',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    fontWeight:
-                        FontWeight.w600, // Assuming AppFonts.semiBold is bold
-                    color: selectedInterests[index]
-                        ? AppColors.getButtonTextColor(context)
-                        : AppColors.getTextPrimary(context),
-                  ),
-              textAlign: TextAlign.center,
+            child: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Text(
+                '${interests[index]} +',
+                style: AppFonts.semiBold(context),
+                textAlign: TextAlign.center,
+              ),
             ),
           ),
         );

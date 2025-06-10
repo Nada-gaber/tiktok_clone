@@ -1,6 +1,7 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:tiktok_clone/core/themes/images.dart';
+import '../../../../core/themes/font_weight_helper.dart';
 import '../../../home/data/models/video_model.dart';
 
 class VideoGrid extends StatelessWidget {
@@ -71,6 +72,26 @@ class VideoGrid extends StatelessWidget {
                       ],
                     ),
                   ),
+                  const SizedBox(height: 10.0),
+                  Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 12,
+                        backgroundImage: video.userImageURL != null
+                            ? CachedNetworkImageProvider(video.userImageURL!)
+                            : const AssetImage(AppAssets.defaultProfile),
+                      ),
+                      const SizedBox(width: 8.0),
+                      Expanded(
+                        child: Text(
+                          video.user! ?? 'Unknown User',
+                          style: AppFonts.regular(context).copyWith(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),
