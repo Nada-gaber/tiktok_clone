@@ -12,14 +12,11 @@ Future<bool> _checkFirstLaunch() async {
   try {
     final prefs = await SharedPreferences.getInstance();
     final isFirstLaunch = prefs.getBool('isFirstLaunch') ?? true;
-    print('isFirstLaunch: $isFirstLaunch'); // Debug log
     if (isFirstLaunch) {
       await prefs.setBool('isFirstLaunch', false);
-      print('Set isFirstLaunch to false'); // Debug log
     }
     return isFirstLaunch;
   } catch (e) {
-    print('Error accessing SharedPreferences: $e');
     return true; // Default to onboarding on error
   }
 }
@@ -35,7 +32,5 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   final isFirstLaunch = await _checkFirstLaunch(); // Perform check once
-  print(
-      'Initial Route: ${isFirstLaunch ? '/onboarding' : '/navbar'}'); // Debug log
   runApp(Tiktok(isFirstLaunch: isFirstLaunch));
 }
