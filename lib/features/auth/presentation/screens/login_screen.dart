@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tiktok_clone/core/themes/colors.dart';
 import 'package:tiktok_clone/core/widgets/shared_button.dart';
 import 'package:tiktok_clone/features/auth/presentation/screens/register_screen.dart';
 import '../../logic/cubit/auth_cubit/auth_cubit.dart';
@@ -52,9 +51,6 @@ class _LoginSheetState extends State<LoginSheet> {
       }
     } catch (e) {
       log("Error: $e");
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Login failed: $e")),
-      );
     }
   }
 
@@ -127,18 +123,16 @@ class _LoginSheetState extends State<LoginSheet> {
             ),
             TextButton(
               onPressed: () {
-                     Navigator.pop(context);
+                Navigator.pop(context);
                 showModalBottomSheet(
-                backgroundColor: const Color(0xFF242424),
                   context: context,
                   isScrollControlled: true,
                   shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(16)),
                   ),
                   builder: (context) => const RegisterSheet(),
                 );
-
-              
               },
               child: const Text("Don't have an account? Register"),
             ),
