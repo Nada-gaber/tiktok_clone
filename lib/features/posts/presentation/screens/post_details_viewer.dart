@@ -35,8 +35,7 @@ class PostDetailsScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius:
                       BorderRadius.circular(AppSizes.width(context, 0.03)),
-                  border: Border.all(color: AppColors.dividerColor),
-                ),
+border: Border.all(color: AppColors.getDividerColor(context)),                ),
                 clipBehavior: Clip.antiAlias,
                 child: Image.file(
                   post.imagePath != null

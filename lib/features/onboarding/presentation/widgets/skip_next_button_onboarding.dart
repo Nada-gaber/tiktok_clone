@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tiktok_clone/core/themes/colors.dart';
 
 import '../../../../core/themes/app_sizes.dart';
-import '../../../../core/themes/colors.dart';
 import '../../../../core/widgets/shared_button.dart';
 import '../screens/welcome_screen.dart';
 
@@ -28,7 +28,7 @@ class SkipNextButtonOnBoardingWidget extends StatelessWidget {
               );
             },
             textColor: Colors.black,
-            buttonColor: AppColors.buttonSecondaryColor,
+           buttonColor: AppColors.getButtonSecondaryBackgroundColor(context),
             minWidth: 160,
             buttonText: 'Skip'),
         CustomButtonWidget(

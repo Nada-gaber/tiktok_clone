@@ -95,6 +95,7 @@ flutter:
     - assets/fonts/
     - assets/icons/navbar/
     - assets/icons/reels/
+    - assets/icons/theme/
     - assets/icons/profile/
     - .tiktok.env
     - assets/

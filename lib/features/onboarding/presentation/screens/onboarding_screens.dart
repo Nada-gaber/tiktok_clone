@@ -45,10 +45,12 @@ class _OnboardingScreensState extends State<OnboardingScreens> {
               Text(
                 'Choose what you like',
                 style: AppFonts.head(context),
+                
                 textAlign: TextAlign.center,
               ),
               Padding(
-                padding: EdgeInsets.symmetric(vertical: AppSizes.paddingSmall(context)),
+                padding: EdgeInsets.symmetric(
+                    vertical: AppSizes.paddingSmall(context)),
                 child: const Text(
                   'Your feed will be personalized based on what you like.',
                   textAlign: TextAlign.center,

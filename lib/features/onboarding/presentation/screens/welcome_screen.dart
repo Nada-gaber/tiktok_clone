@@ -3,7 +3,6 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:tiktok_clone/core/routing/routes.dart';
 import 'package:tiktok_clone/core/themes/images.dart';
 import 'package:tiktok_clone/core/widgets/shared_button.dart';
-
 import '../widgets/rich_text_terms.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -51,7 +50,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             children: [
               const Text(
                 'Welcome to TikTok',
-                style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
               ),
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 10),

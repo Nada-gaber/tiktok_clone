@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/themes/app_sizes.dart';
 import '../../../../core/themes/colors.dart';
-import '../../../../core/themes/font_weight_helper.dart';
+
 class InterestsWrapWidget extends StatelessWidget {
   final List<String> interests;
   final List<bool> selectedInterests;
@@ -24,24 +24,37 @@ class InterestsWrapWidget extends StatelessWidget {
         return SizedBox(
           child: OutlinedButton(
             onPressed: () => onInterestToggle(index),
-            style: OutlinedButton.styleFrom(
-              side: const BorderSide(color: Colors.grey),
-              backgroundColor: selectedInterests[index]
-                  ? AppColors.buttonColor
-                  : AppColors.backgroundLightGray,
-              foregroundColor:
-                  selectedInterests[index] ? Colors.white : Colors.black,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              padding: EdgeInsets.symmetric(
-                horizontal: AppSizes.paddingMedium(context),
-                vertical: AppSizes.paddingSmall(context),
-              ),
-            ),
+            style: Theme.of(context).outlinedButtonTheme.style?.copyWith(
+                  backgroundColor: WidgetStateProperty.all(
+                    selectedInterests[index]
+                        ? AppColors.getButtonBackgroundColor(context)
+                        : AppColors.getButtonSecondaryBackgroundColor(context),
+                  ),
+                  foregroundColor: WidgetStateProperty.all(
+                    selectedInterests[index]
+                        ? AppColors.getButtonTextColor(context)
+                        : AppColors.getTextPrimary(context),
+                  ),
+                  side: WidgetStateProperty.all(
+                    BorderSide(
+                        color: AppColors.getOutlinedButtonBorderColor(context)),
+                  ),
+                  padding: WidgetStateProperty.all(
+                    EdgeInsets.symmetric(
+                      horizontal: AppSizes.paddingMedium(context),
+                      vertical: AppSizes.paddingSmall(context),
+                    ),
+                  ),
+                ),
             child: Text(
               '${interests[index]} +',
-              style: AppFonts.semiBold(context),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    fontWeight:
+                        FontWeight.w600, // Assuming AppFonts.semiBold is bold
+                    color: selectedInterests[index]
+                        ? AppColors.getButtonTextColor(context)
+                        : AppColors.getTextPrimary(context),
+                  ),
               textAlign: TextAlign.center,
             ),
           ),

@@ -1,5 +1,4 @@
 class AppAssets {
-
   // Navigation Bar Icons
   static const String addButton = 'assets/icons/navbar/add.svg';
   static const String homeIcon = 'assets/icons/navbar/home.svg';
@@ -14,11 +13,15 @@ class AppAssets {
 
   // Profile Icons
   static const String imageGallery = 'assets/icons/profile/image-gallery.svg';
-static const String defaultProfile = 'assets/icons/profile/default_profile.png';
-static const String loadingGif = 'assets/icons/profile/loading.gif';
+  static const String defaultProfile =
+      'assets/icons/profile/default_profile.png';
+  static const String loadingGif = 'assets/icons/profile/loading.gif';
 
+  // logo
+  static const String tiktokLogo = 'assets/logo.png';
+  static const String mediaOnboarding = 'assets/media.jpg';
 
-// logo 
-static const String tiktokLogo = 'assets/logo.png';
-static const String mediaOnboarding = 'assets/media.jpg';
+  // Theme Icons
+  static const String lightThemeIcon = 'assets/icons/theme/light_theme.png';
+  static const String darkThemeIcon = 'assets/icons/theme/dark_theme.png';
 }

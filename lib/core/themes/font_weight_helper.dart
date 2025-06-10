@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'app_sizes.dart';
+import 'colors.dart';
 
 class AppFonts {
   static TextStyle regular(BuildContext context) => TextStyle(
         fontFamily: 'Poppins',
         fontWeight: FontWeight.w400,
         fontSize: AppSizes.fontRegular(context),
-        color: Colors.white,
       );
 
   static TextStyle bold(BuildContext context) => TextStyle(
@@ -44,14 +44,13 @@ class AppFonts {
         fontFamily: 'Poppins',
         fontWeight: FontWeight.w300,
         fontSize: AppSizes.fontSmall(context),
-        color: const Color(0xFF666666),
       );
 
   static TextStyle button(BuildContext context) => TextStyle(
         fontFamily: 'Poppins',
         fontWeight: FontWeight.w600,
         fontSize: AppSizes.fontRegular(context),
-        color: Colors.white,
+      //  color: Colors.white,
       );
 
   static TextStyle title(BuildContext context) => TextStyle(
@@ -64,5 +63,7 @@ class AppFonts {
         fontFamily: 'Poppins',
         fontWeight: FontWeight.w800,
         fontSize: AppSizes.fontExtraLarge(context),
+        color: 
+        AppColors.getTextPrimary(context)
       );
 }

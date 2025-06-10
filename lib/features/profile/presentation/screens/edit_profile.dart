@@ -63,7 +63,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         const SnackBar(content: Text('Profile updated')),
       );
 
-      // Pop and return updated user
       Navigator.pop(context, updatedUser);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -83,7 +82,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Edit Profile', style: AppFonts.title(context)),
-        centerTitle: true,
+        centerTitle: true,     
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -106,15 +105,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       child: GestureDetector(
                         onTap: _pickImage,
                         child: Container(
-                          padding:
-                              EdgeInsets.all(AppSizes.paddingSmall(context)),
-                          decoration: const BoxDecoration(
+                          padding: EdgeInsets.all(AppSizes.paddingSmall(context)),
+                          decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: AppColors.buttonColor,
+                            color: AppColors.getButtonBackgroundColor(context),
                           ),
                           child: Icon(
                             Icons.edit,
-                            color: Colors.white,
+                            color: AppColors.getButtonTextColor(context),
                             size: AppSizes.iconSizeSmall(context),
                           ),
                         ),
@@ -129,24 +127,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     border: const OutlineInputBorder(),
                     labelText: 'Display Name',
                     hintText: 'Enter your name',
-                    labelStyle: AppFonts.regular(context).copyWith(
-                      color: AppColors.textSecondary,
-                    ),
-                    hintStyle: AppFonts.regular(context).copyWith(
-                      color: AppColors.textSecondary,
-                    ),
+                    labelStyle: Theme.of(context).inputDecorationTheme.labelStyle,
+                    hintStyle: Theme.of(context).inputDecorationTheme.hintStyle,
                   ),
-                  style:
-                      AppFonts.regular(context).copyWith(color: AppColors.backgroundDarkBlue),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: AppColors.getTextPrimary(context),
+                      ),
                 ),
                 SizedBox(height: AppSizes.paddingSmall(context)),
                 CustomButtonWidget(
                   onPressed: _hasChanges ? _updateProfile : null,
                   buttonText: 'Save Changes',
-                  minWidth: AppSizes.width(context, 1.0), // Full width
+                  minWidth: AppSizes.width(context, 1.0),
                   buttonHeight: AppSizes.buttonHeight(context),
-                  disabledButtonColor: AppColors.buttonColor.withOpacity(0.5),
-                  disabledTextColor: Colors.white.withOpacity(0.7),
                 ),
                 SizedBox(height: AppSizes.paddingMedium(context)),
               ],

@@ -16,7 +16,8 @@ class NotLoggedInProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile', style: AppFonts.title(context)),
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+        title: Text('Profile', style: Theme.of(context).textTheme.titleLarge),
         centerTitle: true,
       ),
       body: Column(
@@ -25,21 +26,23 @@ class NotLoggedInProfile extends StatelessWidget {
           SvgPicture.asset(
             height: AppSizes.iconSizeLarge(context),
             AppAssets.profileIcon,
-            color: AppColors.textSecondary,
+            colorFilter: ColorFilter.mode(
+              AppColors.getNavItemSelectedColor(context),
+              BlendMode.srcIn,
+            ),
           ),
           SizedBox(height: AppSizes.paddingMedium(context)),
           Center(
             child: Text(
               'Log into existing account',
-              style: AppFonts.regular(context)
-              .copyWith(color: Colors.black),
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),
-          SizedBox(height: AppSizes.paddingSmall(context)),
+          SizedBox(height: AppSizes.paddingLarge(context)),
           CustomButtonWidget(
             onPressed: () {
               showModalBottomSheet(
-                backgroundColor: AppColors.backgroundLightGray,
+                backgroundColor: AppColors.getModalBackgroundColor(context),
                 context: context,
                 isScrollControlled: true,
                 shape: RoundedRectangleBorder(
@@ -56,7 +59,7 @@ class NotLoggedInProfile extends StatelessWidget {
             buttonText: 'Login',
             minWidth: AppSizes.buttonWidthHalf(context),
             padding: AppSizes.paddingSmall(context),
-            buttonHeight: AppSizes.buttonHeight(context),
+            buttonHeight: AppSizes.buttonHeight(context) / 1.5,
           ),
         ],
       ),

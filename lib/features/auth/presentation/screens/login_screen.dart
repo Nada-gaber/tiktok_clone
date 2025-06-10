@@ -129,7 +129,7 @@ class _LoginSheetState extends State<LoginSheet> {
               onPressed: () {
                      Navigator.pop(context);
                 showModalBottomSheet(
-                  backgroundColor: AppColors.backgroundLightGray,
+                backgroundColor: const Color(0xFF242424),
                   context: context,
                   isScrollControlled: true,
                   shape: const RoundedRectangleBorder(
