@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tiktok_clone/core/di/dependency_injection.dart';
 import 'package:tiktok_clone/core/themes/images.dart';
 import 'package:tiktok_clone/core/widgets/shared_button.dart';
 import 'package:tiktok_clone/features/profile/presentation/screens/not_logged_in_profile.dart';
 import '../../../../core/themes/app_sizes.dart';
-import '../../../../core/themes/colors.dart';
 import '../../../../core/themes/font_weight_helper.dart';
 import '../../../../core/themes/theme_toggle_button.dart';
 import '../../../../core/widgets/loading_tiktok_widget.dart';

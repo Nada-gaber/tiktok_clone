@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tiktok_clone/core/themes/colors.dart';
 import '../../../../core/themes/app_sizes.dart';
-import '../../../../core/themes/font_weight_helper.dart';
 import '../../../../core/themes/images.dart';
 import '../../../../core/widgets/shared_button.dart';
 import '../../../auth/logic/cubit/auth_cubit/auth_cubit.dart';

@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -8,7 +7,6 @@ import 'package:tiktok_clone/features/home/persentation/helpers/post_helper.dart
 import 'package:tiktok_clone/features/profile/presentation/screens/profile.dart';
 import '../../../../core/di/dependency_injection.dart';
 import '../../../../core/themes/app_sizes.dart';
-import '../../../../core/themes/font_weight_helper.dart';
 import '../../../../core/themes/images.dart';
 import '../../../auth/logic/cubit/auth_cubit/auth_cubit.dart';
 import '../../../auth/logic/cubit/auth_cubit/auth_state.dart';
@@ -28,7 +26,6 @@ class NavScreen extends StatefulWidget {
 
 class _NavScreenState extends State<NavScreen> {
   int _selectedIndex = 0;
-  final user = FirebaseAuth.instance.currentUser;
 
   late List<Widget> _screens;
 
@@ -42,7 +39,16 @@ class _NavScreenState extends State<NavScreen> {
         child: const SearchVideoScreen(),
       ),
       const InboxScreen(),
-      user == null ? const NotLoggedInProfile() : const InboxScreen(),
+      BlocBuilder<AuthCubit, AuthState>(
+        builder: (context, state) {
+          return state.maybeWhen(
+            initial: () => const LoadingTiktokWidget(),
+            unauthenticated: () => const NotLoggedInProfile(),
+            authenticated: (user) => const InboxScreen(),
+            orElse: () => const NotLoggedInProfile(),
+          );
+        },
+      ),
       BlocBuilder<AuthCubit, AuthState>(
         builder: (context, state) {
           return state.maybeWhen(

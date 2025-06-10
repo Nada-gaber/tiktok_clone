@@ -20,7 +20,7 @@ class ProfileImageWidget extends StatelessWidget {
     return CircleAvatar(
       radius: AppSizes.avatarRadius(context),
       backgroundImage: _imageFile != null
-          ? FileImage(_imageFile!)
+          ? FileImage(_imageFile)
           : (widget.user.photoURL != null && widget.user.photoURL!.isNotEmpty
               ? NetworkImage(widget.user.photoURL!)
               : const AssetImage(AppAssets.defaultProfile)) as ImageProvider,

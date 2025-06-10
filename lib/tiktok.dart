@@ -17,8 +17,6 @@ class Tiktok extends StatelessWidget {
       child: BlocBuilder<ThemeCubit, ThemeMode>(
         builder: (context, themeMode) {
           final initialRoute = isFirstLaunch ? Routes.onBoarding : Routes.navBar;
-          print('Tiktok Widget: Initial Route = $initialRoute'); // Debug log
-
           return MaterialApp(
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,
