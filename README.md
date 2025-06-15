@@ -1,5 +1,5 @@
 # TikTok Clone
-![1](https://github.com/user-attachments/assets/eda859db-9421-4113-8079-29913601834f)
+![readme](https://github.com/user-attachments/assets/753b600e-5c9c-4042-9bcf-08ee3e2a71a5)
 
 ---
 
@@ -14,10 +14,10 @@
 ---
 ## 👨‍💻  Features
 
-![1](https://github.com/user-attachments/assets/a2b55883-2734-4f9b-b666-bd45abe4c470)
-![2](https://github.com/user-attachments/assets/200526ff-534a-4cde-b378-244b00a04d22)
-![3](https://github.com/user-attachments/assets/9549be5e-eff4-4061-b8ab-45649ddaf211)
-![4](https://github.com/user-attachments/assets/f7005720-f4c6-4732-abd3-782b0d203c28)
+![2](https://github.com/user-attachments/assets/1943ec7a-501e-41d7-a9fa-bff0e3a44f69)
+![1](https://github.com/user-attachments/assets/1230b245-4a07-4b1d-93c3-693125400616)
+![3](https://github.com/user-attachments/assets/0cdfde03-89df-458a-9f80-a4438014abdf)
+![4](https://github.com/user-attachments/assets/8ea4abd1-269f-4780-968f-8e72ed9e1f54)
 
 ## 🔑 Pixabay API Setup
 
@@ -48,9 +48,5 @@ Store profile images/details.
 final storageRef = FirebaseStorage.instance.ref().child('user_profiles/$userId/profile.jpg');
 await storageRef.putFile(File(imagePath));
 ```
-
----
-
-Built by **Nada Rizk**
 
 
